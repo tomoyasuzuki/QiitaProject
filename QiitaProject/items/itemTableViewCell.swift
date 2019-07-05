@@ -76,24 +76,25 @@ class itemTableViewCell: UITableViewCell {
     // - bind
     
     func bind(items: [Item], indexPath: IndexPath) {
-        for item in items {
-            print(item.user)
-        }
+        // タイトル
         titleLabel.text = items[indexPath.row].title
+        // タグタイトル
         tagTitleLabel.text = "タグ"
-        
-        tagDescriptionLabel.text = toTagDescription(tags: items[indexPath.row].tags!)
-        
-//        if let createdAt = items[indexPath.row].createdAt {
-//            createdAtLabel.text = createdAt
-//        } else {
-//            createdAtLabel.text = "投稿日時を取得できませんでした"
-//        }
-        
-        createdAtLabel.text = items[indexPath.row].createdAt
-        
+        // 作成者名
         userNameLabel.text = items[indexPath.row].user?.name
-        
+        // タグ
+        if let tags = items[indexPath.row].tags {
+            tagDescriptionLabel.text = tagDescription(tags: tags)
+        } else {
+            tagDescriptionLabel.text = "タグがありません"
+        }
+        // 作成日時
+        if let createdAt = items[indexPath.row].createdAt {
+            createdAtLabel.text = createdAt
+        } else {
+            createdAtLabel.text = "投稿日時を取得できませんでした"
+        }
+        // プロフィール写真
         if let profileImageURL = items[indexPath.row].user?.profileImageURL {
             Nuke.loadImage(with: URL(string: profileImageURL)!, into: userImageView)
         } else {
@@ -102,6 +103,7 @@ class itemTableViewCell: UITableViewCell {
     }
     
     // - UIComponent
+    
     private func setupUIComponents() {
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byCharWrapping
@@ -161,7 +163,7 @@ class itemTableViewCell: UITableViewCell {
     
     // - function
     
-    private func toTagDescription(tags: [Tag]) -> String {
+    private func tagDescription(tags: [Tag]) -> String {
         var tagNames: [String] = []
         var tagDescription: String = ""
         
