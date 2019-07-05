@@ -22,15 +22,23 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
         toOauth()
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // 認証が終わった後の処理
-        // apiを叩いてユーザーの詳細情報を取得する
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        dismiss(animated: true, completion: nil)
+        
+        let authCode = getParameter(url: (navigationAction.request.url?.absoluteString)!, param: "code")
+    }
+    
+    func getParameter(url: String, param: String) -> String? {
+        guard  let url = URLComponents(string: url) else {
+            return nil
+        }
+        return url.queryItems?.first(where: { $0.name == param })?.value
     }
 }
 
 private extension QiitaLoginViewController {
     private func toOauth() {
-        let url: URL = URL(string: api.baseUrl + API.Path.oauth.rawValue)!
+        guard let url: URL = URL(string: api.baseUrl + API.Path.oauth.rawValue) else { return }
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
     }

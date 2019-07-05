@@ -11,20 +11,13 @@ import Alamofire
 
 class API {
     let baseUrl: String = "https://qiita.com/api/v2"
-    // リクエスト用の変数
-    let method: HTTPMethod
-    
-    // 初期化
-    init(method: HTTPMethod = .get) {
-        self.method = method
-    }
     
     // リクエストメソッド
-    func call(path: String, parameters: Parameters) -> Single<Data> {
+    func call(path: String, method: HTTPMethod = .get, parameters: Parameters = [:]) -> Single<Data> {
         return Single.create { (observer) -> Disposable in
             let disposeBag = Disposables.create()
             let url = URL(string: "\(self.baseUrl)" + "\(path)")!
-            Alamofire.request(url, method: self.method, parameters: parameters)
+            Alamofire.request(url, method: method, parameters: parameters)
                 .validate()
                 .responseData { response in
                     switch response.result {
