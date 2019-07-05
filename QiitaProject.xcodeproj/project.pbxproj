@@ -12,8 +12,6 @@
 		57154B9E22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57154B9D22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift */; };
 		57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */; };
 		571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */; };
-		571C18DC22CC1C2A00B73FB7 /* SearchedItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DB22CC1C2A00B73FB7 /* SearchedItemsViewController.swift */; };
-		571C18DE22CC1C4600B73FB7 /* SearchedItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DD22CC1C4600B73FB7 /* SearchedItemsViewModel.swift */; };
 		571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */; };
 		571C18E222CC1C6200B73FB7 /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */; };
 		57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57313CE822C9BE62004DC569 /* extentionUIColor.swift */; };
@@ -38,8 +36,6 @@
 		57154B9D22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedUserModel.swift; sourceTree = "<group>"; };
 		57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaLoginViewController.swift; sourceTree = "<group>"; };
 		571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
-		571C18DB22CC1C2A00B73FB7 /* SearchedItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedItemsViewController.swift; sourceTree = "<group>"; };
-		571C18DD22CC1C4600B73FB7 /* SearchedItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedItemsViewModel.swift; sourceTree = "<group>"; };
 		571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
 		57313CE822C9BE62004DC569 /* extentionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionUIColor.swift; sourceTree = "<group>"; };
@@ -110,7 +106,6 @@
 				5731464E22C907E0000E642B /* Model */,
 				5731F98522CC46DF00BC9F6D /* Login */,
 				5731F98422CC46C700BC9F6D /* items */,
-				5731F98622CC46EF00BC9F6D /* SearchedItems */,
 				5731F98722CC470900BC9F6D /* ItemDetail */,
 				5731465222C90F1E000E642B /* Extention */,
 				5731462422C8AA50000E642B /* Main.storyboard */,
@@ -170,15 +165,6 @@
 				57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		5731F98622CC46EF00BC9F6D /* SearchedItems */ = {
-			isa = PBXGroup;
-			children = (
-				571C18DB22CC1C2A00B73FB7 /* SearchedItemsViewController.swift */,
-				571C18DD22CC1C4600B73FB7 /* SearchedItemsViewModel.swift */,
-			);
-			path = SearchedItems;
 			sourceTree = "<group>";
 		};
 		5731F98722CC470900BC9F6D /* ItemDetail */ = {
@@ -317,7 +303,6 @@
 				5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */,
 				57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */,
 				5731463922C8B288000E642B /* TagModel.swift in Sources */,
-				571C18DC22CC1C2A00B73FB7 /* SearchedItemsViewController.swift in Sources */,
 				5731463B22C8B2B7000E642B /* UserModel.swift in Sources */,
 				5731463322C8AAC7000E642B /* ItemModel.swift in Sources */,
 				5731464922C8FD69000E642B /* extentionString.swift in Sources */,
@@ -330,7 +315,6 @@
 				5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */,
 				5731462122C8AA50000E642B /* AppDelegate.swift in Sources */,
 				571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */,
-				571C18DE22CC1C4600B73FB7 /* SearchedItemsViewModel.swift in Sources */,
 				57154B9822CAC5F600EF7FCF /* UserItemModel.swift in Sources */,
 				5731463522C8AB7F000E642B /* APIManager.swift in Sources */,
 			);
