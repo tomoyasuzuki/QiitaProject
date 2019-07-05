@@ -3,25 +3,69 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D2B23B3B96E59EE0C5B6CC6 /* Pods_QiitaProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2FB650DE6F0BAA79E4581E /* Pods_QiitaProject.framework */; };
+		57154B9822CAC5F600EF7FCF /* UserItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57154B9722CAC5F600EF7FCF /* UserItemModel.swift */; };
+		57154B9E22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57154B9D22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift */; };
+		57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */; };
+		571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */; };
+		571C18DC22CC1C2A00B73FB7 /* SearchedItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DB22CC1C2A00B73FB7 /* SearchedItemsViewController.swift */; };
+		571C18DE22CC1C4600B73FB7 /* SearchedItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DD22CC1C4600B73FB7 /* SearchedItemsViewModel.swift */; };
+		571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */; };
+		571C18E222CC1C6200B73FB7 /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */; };
+		57313CE522C9BCB7004DC569 /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57313CE422C9BCB7004DC569 /* Decode.swift */; };
+		57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57313CE822C9BE62004DC569 /* extentionUIColor.swift */; };
 		5731462122C8AA50000E642B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731462022C8AA50000E642B /* AppDelegate.swift */; };
-		5731462322C8AA50000E642B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731462222C8AA50000E642B /* ViewController.swift */; };
+		5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731462222C8AA50000E642B /* ItemsViewController.swift */; };
 		5731462622C8AA50000E642B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5731462422C8AA50000E642B /* Main.storyboard */; };
 		5731462822C8AA56000E642B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5731462722C8AA56000E642B /* Assets.xcassets */; };
 		5731462B22C8AA56000E642B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5731462922C8AA56000E642B /* LaunchScreen.storyboard */; };
+		5731463322C8AAC7000E642B /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731463222C8AAC6000E642B /* ItemModel.swift */; };
+		5731463522C8AB7F000E642B /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731463422C8AB7F000E642B /* APIManager.swift */; };
+		5731463722C8B271000E642B /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731463622C8B271000E642B /* GroupModel.swift */; };
+		5731463922C8B288000E642B /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731463822C8B288000E642B /* TagModel.swift */; };
+		5731463B22C8B2B7000E642B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731463A22C8B2B7000E642B /* UserModel.swift */; };
+		5731464922C8FD69000E642B /* extentionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731464822C8FD69000E642B /* extentionString.swift */; };
+		5731464B22C900DA000E642B /* extentionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731464A22C900DA000E642B /* extentionDate.swift */; };
+		5731F97F22CC1FFD00BC9F6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5731F97E22CC1FFD00BC9F6D /* GoogleService-Info.plist */; };
+		5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */; };
+		5731F98322CC40ED00BC9F6D /* itemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5731F98122CC40ED00BC9F6D /* itemTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57154B9722CAC5F600EF7FCF /* UserItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemModel.swift; sourceTree = "<group>"; };
+		57154B9D22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedUserModel.swift; sourceTree = "<group>"; };
+		57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaLoginViewController.swift; sourceTree = "<group>"; };
+		571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
+		571C18DB22CC1C2A00B73FB7 /* SearchedItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedItemsViewController.swift; sourceTree = "<group>"; };
+		571C18DD22CC1C4600B73FB7 /* SearchedItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedItemsViewModel.swift; sourceTree = "<group>"; };
+		571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
+		571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
+		57313CE422C9BCB7004DC569 /* Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decode.swift; sourceTree = "<group>"; };
+		57313CE822C9BE62004DC569 /* extentionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionUIColor.swift; sourceTree = "<group>"; };
 		5731461D22C8AA50000E642B /* QiitaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiitaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5731462022C8AA50000E642B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5731462222C8AA50000E642B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5731462222C8AA50000E642B /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		5731462522C8AA50000E642B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5731462722C8AA56000E642B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5731462A22C8AA56000E642B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5731462C22C8AA56000E642B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5731463222C8AAC6000E642B /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		5731463422C8AB7F000E642B /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		5731463622C8B271000E642B /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
+		5731463822C8B288000E642B /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		5731463A22C8B2B7000E642B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		5731464822C8FD69000E642B /* extentionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionString.swift; sourceTree = "<group>"; };
+		5731464A22C900DA000E642B /* extentionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionDate.swift; sourceTree = "<group>"; };
+		5731F97E22CC1FFD00BC9F6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemTableViewCell.swift; sourceTree = "<group>"; };
+		5731F98122CC40ED00BC9F6D /* itemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = itemTableViewCell.xib; sourceTree = "<group>"; };
+		5834019A5A8561AEE5635563 /* Pods-QiitaProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaProject.release.xcconfig"; path = "Target Support Files/Pods-QiitaProject/Pods-QiitaProject.release.xcconfig"; sourceTree = "<group>"; };
+		7080B8655ACD3D8A88C0A94A /* Pods-QiitaProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaProject.debug.xcconfig"; path = "Target Support Files/Pods-QiitaProject/Pods-QiitaProject.debug.xcconfig"; sourceTree = "<group>"; };
+		8E2FB650DE6F0BAA79E4581E /* Pods_QiitaProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QiitaProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +73,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D2B23B3B96E59EE0C5B6CC6 /* Pods_QiitaProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		420A93DF6780D8B63ADFC705 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7080B8655ACD3D8A88C0A94A /* Pods-QiitaProject.debug.xcconfig */,
+				5834019A5A8561AEE5635563 /* Pods-QiitaProject.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5731461422C8AA50000E642B = {
 			isa = PBXGroup;
 			children = (
 				5731461F22C8AA50000E642B /* QiitaProject */,
 				5731461E22C8AA50000E642B /* Products */,
+				420A93DF6780D8B63ADFC705 /* Pods */,
+				6F2685B374FE3151F34FE5B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +110,98 @@
 		5731461F22C8AA50000E642B /* QiitaProject */ = {
 			isa = PBXGroup;
 			children = (
-				5731462022C8AA50000E642B /* AppDelegate.swift */,
-				5731462222C8AA50000E642B /* ViewController.swift */,
+				5731465122C9080D000E642B /* API */,
+				5731464E22C907E0000E642B /* Model */,
+				5731F98522CC46DF00BC9F6D /* Login */,
+				5731F98422CC46C700BC9F6D /* items */,
+				5731F98622CC46EF00BC9F6D /* SearchedItems */,
+				5731F98722CC470900BC9F6D /* ItemDetail */,
+				5731465222C90F1E000E642B /* Extention */,
 				5731462422C8AA50000E642B /* Main.storyboard */,
+				5731462022C8AA50000E642B /* AppDelegate.swift */,
 				5731462722C8AA56000E642B /* Assets.xcassets */,
 				5731462922C8AA56000E642B /* LaunchScreen.storyboard */,
 				5731462C22C8AA56000E642B /* Info.plist */,
+				5731F97E22CC1FFD00BC9F6D /* GoogleService-Info.plist */,
 			);
 			path = QiitaProject;
+			sourceTree = "<group>";
+		};
+		5731464E22C907E0000E642B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5731463A22C8B2B7000E642B /* UserModel.swift */,
+				57154B9D22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift */,
+				57154B9722CAC5F600EF7FCF /* UserItemModel.swift */,
+				5731463822C8B288000E642B /* TagModel.swift */,
+				5731463622C8B271000E642B /* GroupModel.swift */,
+				5731463222C8AAC6000E642B /* ItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5731465122C9080D000E642B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				5731463422C8AB7F000E642B /* APIManager.swift */,
+				57313CE422C9BCB7004DC569 /* Decode.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		5731465222C90F1E000E642B /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				5731464822C8FD69000E642B /* extentionString.swift */,
+				5731464A22C900DA000E642B /* extentionDate.swift */,
+				57313CE822C9BE62004DC569 /* extentionUIColor.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		5731F98422CC46C700BC9F6D /* items */ = {
+			isa = PBXGroup;
+			children = (
+				5731462222C8AA50000E642B /* ItemsViewController.swift */,
+				571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */,
+				5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */,
+				5731F98122CC40ED00BC9F6D /* itemTableViewCell.xib */,
+			);
+			path = items;
+			sourceTree = "<group>";
+		};
+		5731F98522CC46DF00BC9F6D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5731F98622CC46EF00BC9F6D /* SearchedItems */ = {
+			isa = PBXGroup;
+			children = (
+				571C18DB22CC1C2A00B73FB7 /* SearchedItemsViewController.swift */,
+				571C18DD22CC1C4600B73FB7 /* SearchedItemsViewModel.swift */,
+			);
+			path = SearchedItems;
+			sourceTree = "<group>";
+		};
+		5731F98722CC470900BC9F6D /* ItemDetail */ = {
+			isa = PBXGroup;
+			children = (
+				571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */,
+				571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */,
+			);
+			path = ItemDetail;
+			sourceTree = "<group>";
+		};
+		6F2685B374FE3151F34FE5B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E2FB650DE6F0BAA79E4581E /* Pods_QiitaProject.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +211,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5731462F22C8AA56000E642B /* Build configuration list for PBXNativeTarget "QiitaProject" */;
 			buildPhases = (
+				EDBB9528E770590D306A18B6 /* [CP] Check Pods Manifest.lock */,
 				5731461922C8AA50000E642B /* Sources */,
 				5731461A22C8AA50000E642B /* Frameworks */,
 				5731461B22C8AA50000E642B /* Resources */,
+				ECF387DFE3BD369E38EA1AF6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,21 +264,83 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5731F98322CC40ED00BC9F6D /* itemTableViewCell.xib in Resources */,
 				5731462B22C8AA56000E642B /* LaunchScreen.storyboard in Resources */,
 				5731462822C8AA56000E642B /* Assets.xcassets in Resources */,
 				5731462622C8AA50000E642B /* Main.storyboard in Resources */,
+				5731F97F22CC1FFD00BC9F6D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ECF387DFE3BD369E38EA1AF6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QiitaProject/Pods-QiitaProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QiitaProject/Pods-QiitaProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QiitaProject/Pods-QiitaProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDBB9528E770590D306A18B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QiitaProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5731461922C8AA50000E642B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5731462322C8AA50000E642B /* ViewController.swift in Sources */,
+				5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */,
+				57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */,
+				5731463922C8B288000E642B /* TagModel.swift in Sources */,
+				571C18DC22CC1C2A00B73FB7 /* SearchedItemsViewController.swift in Sources */,
+				5731463B22C8B2B7000E642B /* UserModel.swift in Sources */,
+				5731463322C8AAC7000E642B /* ItemModel.swift in Sources */,
+				5731464922C8FD69000E642B /* extentionString.swift in Sources */,
+				57154B9E22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift in Sources */,
+				571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */,
+				5731464B22C900DA000E642B /* extentionDate.swift in Sources */,
+				5731463722C8B271000E642B /* GroupModel.swift in Sources */,
+				571C18E222CC1C6200B73FB7 /* ItemDetailViewModel.swift in Sources */,
+				57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */,
+				57313CE522C9BCB7004DC569 /* Decode.swift in Sources */,
+				5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */,
 				5731462122C8AA50000E642B /* AppDelegate.swift in Sources */,
+				571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */,
+				571C18DE22CC1C4600B73FB7 /* SearchedItemsViewModel.swift in Sources */,
+				57154B9822CAC5F600EF7FCF /* UserItemModel.swift in Sources */,
+				5731463522C8AB7F000E642B /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +484,7 @@
 		};
 		5731463022C8AA56000E642B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7080B8655ACD3D8A88C0A94A /* Pods-QiitaProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +503,7 @@
 		};
 		5731463122C8AA56000E642B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5834019A5A8561AEE5635563 /* Pods-QiitaProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
