@@ -8,10 +8,13 @@
 
 import UIKit
 import WebKit
+import Alamofire
 
 class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     @IBOutlet var webView: WKWebView!
+    
     let api = API()
+    let viewModel = QiitaLoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,16 +26,20 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
         dismiss(animated: true, completion: nil)
         
-        let authCode = getParameter(url: (navigationAction.request.url?.absoluteString)!, param: "code")
+        guard let url = navigationAction.request.url?.absoluteString else { return }
+        // 認証コード取得
+        let authCode = getParameter(url: url, param: "code")
+        // アクセストークン取得
+        viewModel.getAccessToken(authCode: authCode!)
+        
     }
     
     func getParameter(url: String, param: String) -> String? {
-        guard  let url = URLComponents(string: url) else {
-            return nil
-        }
-        return url.queryItems?.first(where: { $0.name == param })?.value
+        guard let url = URLComponents(string: url) else { return nil }
+        return url.queryItems?.first(where: { $0.name == param })!.value! ?? ""
     }
 }
 

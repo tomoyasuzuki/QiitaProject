@@ -23,6 +23,9 @@ class ItemsViewModel {
     
     // デコード処理
     func toItem(data: Data) -> [Item] {
-        return try! JSONDecoder().decode([Item].self, from: data)
+        var items: [Item] {
+            return try! JSONDecoder().decode([Item].self, from: data)
+        }
+        return items
     }
 }

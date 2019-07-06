@@ -39,6 +39,7 @@ extension API {
         case users = "/users"
         case tags = "/tags"
         case oauth = "/oauth/authorize"
+        case acceessToken = "/access_tokens"
     }
 }
 
@@ -46,14 +47,16 @@ extension API {
 extension API {
     enum QiitaParameters {
         case items(query: String)
-        case login
+        case login(code: String)
         
         var params: Parameters {
             switch self {
             case .items(let query):
                 return ["query": query]
-            case .login:
-                return ["client_id": "956b371103c3679441aee2b897bdf94eb6d28be8", "scope": "read_qiita" + "write_qiita"]
+            case .login(let code):
+                return ["client_id": "956b371103c3679441aee2b897bdf94eb6d28be8",
+                        "client_scret": "3f3fc429c399fbed68340b6a5d1c75d2ed877ac9",
+                        "code": code]
                 
             }
         }

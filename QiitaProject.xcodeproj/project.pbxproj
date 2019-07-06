@@ -29,6 +29,8 @@
 		5731464B22C900DA000E642B /* extentionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731464A22C900DA000E642B /* extentionDate.swift */; };
 		5731F97F22CC1FFD00BC9F6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5731F97E22CC1FFD00BC9F6D /* GoogleService-Info.plist */; };
 		5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */; };
+		5731F98922D0172E00BC9F6D /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98822D0172E00BC9F6D /* TokenModel.swift */; };
+		5731F98B22D0175E00BC9F6D /* QiitaLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98A22D0175E00BC9F6D /* QiitaLoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		5731464A22C900DA000E642B /* extentionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionDate.swift; sourceTree = "<group>"; };
 		5731F97E22CC1FFD00BC9F6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemTableViewCell.swift; sourceTree = "<group>"; };
+		5731F98822D0172E00BC9F6D /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		5731F98A22D0175E00BC9F6D /* QiitaLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaLoginViewModel.swift; sourceTree = "<group>"; };
 		5834019A5A8561AEE5635563 /* Pods-QiitaProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaProject.release.xcconfig"; path = "Target Support Files/Pods-QiitaProject/Pods-QiitaProject.release.xcconfig"; sourceTree = "<group>"; };
 		7080B8655ACD3D8A88C0A94A /* Pods-QiitaProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaProject.debug.xcconfig"; path = "Target Support Files/Pods-QiitaProject/Pods-QiitaProject.debug.xcconfig"; sourceTree = "<group>"; };
 		8E2FB650DE6F0BAA79E4581E /* Pods_QiitaProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QiitaProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +131,7 @@
 				5731463822C8B288000E642B /* TagModel.swift */,
 				5731463622C8B271000E642B /* GroupModel.swift */,
 				5731463222C8AAC6000E642B /* ItemModel.swift */,
+				5731F98822D0172E00BC9F6D /* TokenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */,
+				5731F98A22D0175E00BC9F6D /* QiitaLoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */,
+				5731F98922D0172E00BC9F6D /* TokenModel.swift in Sources */,
 				57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */,
 				5731463922C8B288000E642B /* TagModel.swift in Sources */,
 				5731463B22C8B2B7000E642B /* UserModel.swift in Sources */,
@@ -310,6 +317,7 @@
 				571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */,
 				5731464B22C900DA000E642B /* extentionDate.swift in Sources */,
 				5731463722C8B271000E642B /* GroupModel.swift in Sources */,
+				5731F98B22D0175E00BC9F6D /* QiitaLoginViewModel.swift in Sources */,
 				571C18E222CC1C6200B73FB7 /* ItemDetailViewModel.swift in Sources */,
 				57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */,
 				5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */,
