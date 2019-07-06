@@ -31,7 +31,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             .subscribe(onNext: { (item) in
                 self.items = item
                 self.tableView.reloadData()
-                self.tableView.layoutIfNeeded()
             })
             .disposed(by: disposeBag)
         

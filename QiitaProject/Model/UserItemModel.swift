@@ -8,10 +8,10 @@
 
 struct UserItem: Codable {
     let name: String?
-    let profileImageURL: String?
+    let profileImageUrl: String?
     
-    init(name: String, profileImageURL: String) {
+    init(name: String, profileImageUrl: String) {
         self.name = name
-        self.profileImageURL = profileImageURL
+        self.profileImageUrl = profileImageUrl
     }
 }

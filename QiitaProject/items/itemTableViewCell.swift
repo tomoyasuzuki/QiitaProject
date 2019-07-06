@@ -89,13 +89,9 @@ class itemTableViewCell: UITableViewCell {
             tagDescriptionLabel.text = "タグがありません"
         }
         // 作成日時
-        if let createdAt = items[indexPath.row].createdAt {
-            createdAtLabel.text = createdAt
-        } else {
-            createdAtLabel.text = "投稿日時を取得できませんでした"
-        }
+        createdAtLabel.text = items[indexPath.row].createdAt.toDate().toString()
         // プロフィール写真
-        if let profileImageURL = items[indexPath.row].user?.profileImageURL {
+        if let profileImageURL = items[indexPath.row].user?.profileImageUrl {
             Nuke.loadImage(with: URL(string: profileImageURL)!, into: userImageView)
         } else {
             userImageView.backgroundColor = UIColor.gray
