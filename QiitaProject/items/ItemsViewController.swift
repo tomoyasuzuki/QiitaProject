@@ -61,10 +61,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let title = item.title, let url = item.url else { return }
-        let itemDetailViewController = ItemDetailViewController(title: title, url: url)
 
         // 画面遷移
-        self.navigationController?.pushViewController(itemDetailViewController, animated: true)
+        performSegue(withIdentifier: "toItemDetail", sender: (title, url))
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toItemDetail" {
+            let vc = segue.destination as! ItemDetailViewController
+            (vc.titleString, vc.urlString) = sender as! (String, String)
+        }
     }
 }
 

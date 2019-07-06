@@ -19,17 +19,6 @@ class ItemDetailViewController: UIViewController, WKNavigationDelegate {
     var urlString: String =  ""
     var titleString: String = ""
     
-    init(title: String, url: String) {
-        super.init(nibName: nil, bundle: nil)
-        
-        self.urlString = url
-        self.titleString = title
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
