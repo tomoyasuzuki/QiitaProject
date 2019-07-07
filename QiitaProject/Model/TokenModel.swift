@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Token
 struct Token: Codable {
     let clientID: String
-    let scopes: [String]
+    let clientSecret: String
     let token: String
 }
 

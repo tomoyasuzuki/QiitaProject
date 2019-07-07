@@ -10,13 +10,21 @@ import RxSwift
 import Alamofire
 
 class API {
-    let baseUrl: String = "https://qiita.com/api/v2"
+    static let baseUrl: String = "https://qiita.com/api/v2"
+    static let clientId: String = "956b371103c3679441aee2b897bdf94eb6d28be8"
+    static let clientSecret: String = ""
+    
+    var oauthURL: URLRequest {
+        let url: URL = URL(string: API.baseUrl + API.Path.oauth.rawValue)!
+        let urlRequest = URLRequest(url: url.queryItemAdded([URLQueryItem(name: API.Key.clientId.rawValue, value: API.clientId), URLQueryItem(name: API.Key.clientSecret.rawValue, value: API.clientSecret)])!)
+        return urlRequest
+    }
     
     // リクエストメソッド
     func call(path: String, method: HTTPMethod = .get, parameters: Parameters = [:]) -> Single<Data> {
         return Single.create { (observer) -> Disposable in
             let disposeBag = Disposables.create()
-            let url = URL(string: "\(self.baseUrl)" + "\(path)")!
+            let url = URL(string: "\(API.baseUrl)" + "\(path)")!
             Alamofire.request(url, method: method, parameters: parameters)
                 .validate()
                 .responseData { response in
@@ -33,6 +41,7 @@ class API {
 }
 
 // path
+
 extension API {
     enum Path: String {
         case items = "/items"
@@ -44,21 +53,37 @@ extension API {
 }
 
 // parameters
+
 extension API {
     enum QiitaParameters {
-        case items(query: String)
-        case login(code: String)
+        case query(query: String, perPage: Int)
+        case oauth
+        case getToken(code: String)
+        case page(page: Int)
+        
         
         var params: Parameters {
             switch self {
-            case .items(let query):
-                return ["query": query]
-            case .login(let code):
+            case .query(let query, let perPage):
+                return ["query": query, "per_page": "\(perPage)"]
+            case .oauth:
                 return ["client_id": "956b371103c3679441aee2b897bdf94eb6d28be8",
-                        "client_scret": "3f3fc429c399fbed68340b6a5d1c75d2ed877ac9",
+                        "scope": "read_qiita"]
+            case .getToken(let code):
+                return ["client_id": "956b371103c3679441aee2b897bdf94eb6d28be8",
+                        "client_secret": "3f3fc429c399fbed68340b6a5d1c75d2ed877ac9",
                         "code": code]
+            case .page(let page):
+                return ["page": "\(page)"]
                 
             }
         }
+    }
+    
+    enum Key: String {
+        case query = "query"
+        case page = "page"
+        case clientId = "client_id"
+        case clientSecret = "client_secret"
     }
 }

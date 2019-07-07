@@ -12,12 +12,15 @@ import RxCocoa
 import Nuke
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    private let viewModel = ItemsViewModel()
-    private var items: [Item] = []
-    private let disposeBag = DisposeBag()
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    private let viewModel = ItemsViewModel()
+    private let disposeBag = DisposeBag()
+    fileprivate let refresh = UIRefreshControl()
+    
+    private var isLoading = false
+    private let defaultNumberOfRows = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +28,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshTableView(_ :)), for: .valueChanged)
+        
+        tableView.isHidden = true
+        
         tableView.register(itemTableViewCell.self, forCellReuseIdentifier: "itemTableViewCell")
         
         viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
-            .subscribe(onNext: { (item) in
-                self.items = item
+            .subscribe(onNext: { _ in
+                self.isLoading = false
+                self.tableView.isHidden = false
                 self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -39,12 +48,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // - Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        if self.isLoading {
+            return defaultNumberOfRows
+        } else {
+            return viewModel.items.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemTableViewCell", for: indexPath) as! itemTableViewCell
-        cell.bind(items: self.items, indexPath: indexPath)
+        cell.bind(items: viewModel.items, indexPath: indexPath)
         return cell
     }
     
@@ -56,7 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // タップされたセルを特定
-        let item = self.items[indexPath.row]
+        let item = viewModel.items[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let title = item.title, let url = item.url else { return }
@@ -65,11 +78,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         performSegue(withIdentifier: "toItemDetail", sender: (title, url))
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 最下部のセルを検知
+        let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
+        if indexPath.row == lastCellRow {
+            
+        }
+    }
+    
+    // - function
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toItemDetail" {
             let vc = segue.destination as! ItemDetailViewController
             (vc.titleString, vc.urlString) = sender as! (String, String)
         }
+    }
+    
+    @objc func refreshTableView(_ sender: AnyObject) {
+        // APIを叩く
+        // itemsのcountが増える
+        // reloadtableした時にセルが増える
     }
 }
 

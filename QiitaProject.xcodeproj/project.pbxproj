@@ -31,6 +31,9 @@
 		5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */; };
 		5731F98922D0172E00BC9F6D /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98822D0172E00BC9F6D /* TokenModel.swift */; };
 		5731F98B22D0175E00BC9F6D /* QiitaLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98A22D0175E00BC9F6D /* QiitaLoginViewModel.swift */; };
+		5780498D22D1A6DA001F76C5 /* extentionURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780498C22D1A6DA001F76C5 /* extentionURL.swift */; };
+		5780499022D1CD71001F76C5 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780498F22D1CD71001F76C5 /* UserProfileViewController.swift */; };
+		5780499222D1CD7F001F76C5 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499122D1CD7F001F76C5 /* UserProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemTableViewCell.swift; sourceTree = "<group>"; };
 		5731F98822D0172E00BC9F6D /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		5731F98A22D0175E00BC9F6D /* QiitaLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaLoginViewModel.swift; sourceTree = "<group>"; };
+		5780498C22D1A6DA001F76C5 /* extentionURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionURL.swift; sourceTree = "<group>"; };
+		5780498F22D1CD71001F76C5 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		5780499122D1CD7F001F76C5 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		5834019A5A8561AEE5635563 /* Pods-QiitaProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaProject.release.xcconfig"; path = "Target Support Files/Pods-QiitaProject/Pods-QiitaProject.release.xcconfig"; sourceTree = "<group>"; };
 		7080B8655ACD3D8A88C0A94A /* Pods-QiitaProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaProject.debug.xcconfig"; path = "Target Support Files/Pods-QiitaProject/Pods-QiitaProject.debug.xcconfig"; sourceTree = "<group>"; };
 		8E2FB650DE6F0BAA79E4581E /* Pods_QiitaProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QiitaProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +117,7 @@
 				5731F98522CC46DF00BC9F6D /* Login */,
 				5731F98422CC46C700BC9F6D /* items */,
 				5731F98722CC470900BC9F6D /* ItemDetail */,
+				5780498E22D1CD4F001F76C5 /* UserProfile */,
 				5731465222C90F1E000E642B /* Extention */,
 				5731462422C8AA50000E642B /* Main.storyboard */,
 				5731462022C8AA50000E642B /* AppDelegate.swift */,
@@ -150,6 +157,7 @@
 				5731464822C8FD69000E642B /* extentionString.swift */,
 				5731464A22C900DA000E642B /* extentionDate.swift */,
 				57313CE822C9BE62004DC569 /* extentionUIColor.swift */,
+				5780498C22D1A6DA001F76C5 /* extentionURL.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -180,6 +188,15 @@
 				571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */,
 			);
 			path = ItemDetail;
+			sourceTree = "<group>";
+		};
+		5780498E22D1CD4F001F76C5 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				5780498F22D1CD71001F76C5 /* UserProfileViewController.swift */,
+				5780499122D1CD7F001F76C5 /* UserProfileViewModel.swift */,
+			);
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		6F2685B374FE3151F34FE5B7 /* Frameworks */ = {
@@ -308,8 +325,10 @@
 			files = (
 				5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */,
 				5731F98922D0172E00BC9F6D /* TokenModel.swift in Sources */,
+				5780498D22D1A6DA001F76C5 /* extentionURL.swift in Sources */,
 				57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */,
 				5731463922C8B288000E642B /* TagModel.swift in Sources */,
+				5780499222D1CD7F001F76C5 /* UserProfileViewModel.swift in Sources */,
 				5731463B22C8B2B7000E642B /* UserModel.swift in Sources */,
 				5731463322C8AAC7000E642B /* ItemModel.swift in Sources */,
 				5731464922C8FD69000E642B /* extentionString.swift in Sources */,
@@ -321,6 +340,7 @@
 				571C18E222CC1C6200B73FB7 /* ItemDetailViewModel.swift in Sources */,
 				57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */,
 				5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */,
+				5780499022D1CD71001F76C5 /* UserProfileViewController.swift in Sources */,
 				5731462122C8AA50000E642B /* AppDelegate.swift in Sources */,
 				571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */,
 				57154B9822CAC5F600EF7FCF /* UserItemModel.swift in Sources */,
