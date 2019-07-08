@@ -13,17 +13,14 @@ class QiitaLoginViewModel {
     let api = API()
     // アクセストークンの保持
     var accessToken: String = ""
-    // oauth画面へ遷移する際のURL(クライアントによって一意なので変数として保持する)
-    var oauthURL: URLRequest {
-        return api.oauthURL
-    }
     
-    func getAccessToken(authCode: String) -> Observable<Token> {
-        return api.call(path: API.Path.acceessToken.rawValue, method: .post, parameters: API.QiitaParameters.getToken(code: authCode).params)
+    func getAccessToken(authCode: String) {
+        api.call(AccessTokenRequest(code: authCode))
             .asObservable()
             .map { data in self.toToken(data: data)}
             .do(onNext: { token in
                 self.accessToken = token.token
+                print("accesstoken: \(self.accessToken)")
             })
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class UserProfileViewModel {
     let api = API()
@@ -15,26 +16,59 @@ class UserProfileViewModel {
     // viewControllerから渡してもらう
     let acccessToken: String = ""
     
-    /*
- 
-     本来はpathを変更すればメソッドの数を減らせるのでそうするべきかも
- 
-    */
-    
+    private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
+    private var isLoadingObservable: Observable<Bool> { return self.isLoadingRelay.asObservable() }
     // ユーザープロフィール
-    func fetchUserProfile() -> Single<Data>{
-        return api.call(path: API.Path.users.rawValue + "/userid")
+    func fetchUserProfile() -> Observable<SpecifiedUser> {
+        return api.call(UserProfileRequest())
+            .do {
+                self.isLoadingRelay.accept(true)
+            }
+            .asObservable()
+            .map { data in self.toUser(data: data) }
     }
-    // ユーザーのフォローユーザー
-    func fetchUserFollower() -> Single<Data>{
-        return api.call(path: "")
+    
+    // ユーザーがフォローしているタグ
+    func fetchUserFolloingTags() -> Observable<[ItemTag]> {
+        return api.call(UserProfileRequest())
+            .do {
+                self.isLoadingRelay.accept(true)
+            }
+            .asObservable()
+            .map { data in self.toItemTag(data: data) }
     }
-    // ユーザーのフォロワー
-    func fetchUserFollowee() -> Single<Data>{
-        return api.call(path: "")
-    }
+    
     // ユーザーがストックしている記事
-    func fetchUserStockItems() -> Single<Data> {
-        return api.call(path: "")
+    func fetchUserStockItems() -> Observable<[Item]> {
+        return api.call(UserProfileRequest())
+            .do {
+                self.isLoadingRelay.accept(true)
+            }
+            .asObservable()
+            .map { data in self.toItem(data: data) }
+    }
+    
+    // デコード処理
+    func toUser(data: Data) -> SpecifiedUser {
+        var items: SpecifiedUser {
+            return try! JSONDecoder().decode(SpecifiedUser.self, from: data)
+        }
+        return items
+    }
+    
+    // デコード処理
+    public func toItem(data: Data) -> [Item] {
+        var items: [Item] {
+            return try! JSONDecoder().decode([Item].self, from: data)
+        }
+        return items
+    }
+    
+    // デコード処理
+    public func toItemTag(data: Data) -> [ItemTag] {
+        var items: [ItemTag] {
+            return try! JSONDecoder().decode([ItemTag].self, from: data)
+        }
+        return items
     }
 }

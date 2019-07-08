@@ -22,7 +22,7 @@ class ItemDetailViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        webView.navigationDelegate = self
+        webView.navigationDelegate = self
         print(webView)
         
         toItemPage(urlString: urlString)

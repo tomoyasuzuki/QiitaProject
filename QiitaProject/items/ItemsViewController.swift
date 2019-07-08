@@ -19,7 +19,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     private let disposeBag = DisposeBag()
     fileprivate let refresh = UIRefreshControl()
     
-    private var isLoading = false
     private let defaultNumberOfRows = 10
     
     override func viewDidLoad() {
@@ -35,24 +34,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.register(itemTableViewCell.self, forCellReuseIdentifier: "itemTableViewCell")
         
-        viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
-            .subscribe(onNext: { _ in
-                self.isLoading = false
-                self.tableView.isHidden = false
-                self.tableView.reloadData()
-            })
-            .disposed(by: disposeBag)
-        
+        setupDataBinding()
     }
     
     // - Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.isLoading {
-            return defaultNumberOfRows
-        } else {
-            return viewModel.items.count
-        }
+        return viewModel.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,11 +70,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 最下部のセルを検知
         let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
         if indexPath.row == lastCellRow {
-            
+            // 追加でAPIを叩く
         }
     }
     
     // - function
+    
+    private func setupDataBinding() {
+        viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
+            .subscribe(onNext: { _ in
+                self.tableView.isHidden = false
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isLoadingObservable
+            .subscribe(onNext: { isLoading in
+                if isLoading {
+                    // Progress表示
+                } else {
+                    // Progress非表示
+                }
+            })
+            .disposed(by: disposeBag)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toItemDetail" {

@@ -25,7 +25,7 @@ struct Item: Codable {
     let title: String?
     let updatedAt: String?
     let url: String?
-    let user: User?
+    let user: ItemUser?
     let pageViewsCount: Int?
     
     enum CodingKeys: String, CodingKey {

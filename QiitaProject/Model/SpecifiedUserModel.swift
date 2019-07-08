@@ -1,14 +1,13 @@
 //
-//  UserModel.swift
+//  SpecifiedUserModel.swift
 //  QiitaProject
 //
-//  Created by 鈴木友也 on 2019/06/30.
+//  Created by 鈴木友也 on 2019/07/07.
 //  Copyright © 2019 tomoya.suzuki. All rights reserved.
 //
-import Foundation
 
-struct ItemUser: Codable {
-    let userDescription, facebookID: String?
+struct User: Codable {
+    let description, facebookID: String?
     let followeesCount, followersCount: Int?
     let githubLoginName, id: String?
     let itemsCount: Int?
@@ -20,7 +19,7 @@ struct ItemUser: Codable {
     let websiteURL: String?
     
     enum CodingKeys: String, CodingKey {
-        case userDescription
+        case description
         case facebookID = "facebook_id"
         case followeesCount
         case followersCount
@@ -38,4 +37,3 @@ struct ItemUser: Codable {
         case websiteURL = "website_url"
     }
 }
-
