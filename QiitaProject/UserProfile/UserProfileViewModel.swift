@@ -19,8 +19,8 @@ class UserProfileViewModel {
     private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     private var isLoadingObservable: Observable<Bool> { return self.isLoadingRelay.asObservable() }
     // ユーザープロフィール
-    func fetchUserProfile() -> Observable<SpecifiedUser> {
-        return api.call(UserProfileRequest())
+    func fetchUserProfile(userId: String) -> Observable<User> {
+        return api.call(UserProfileRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
             }
@@ -29,8 +29,8 @@ class UserProfileViewModel {
     }
     
     // ユーザーがフォローしているタグ
-    func fetchUserFolloingTags() -> Observable<[ItemTag]> {
-        return api.call(UserProfileRequest())
+    func fetchUserFolloingTags(userId: String) -> Observable<[ItemTag]> {
+        return api.call(UserProfileRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
             }
@@ -39,8 +39,8 @@ class UserProfileViewModel {
     }
     
     // ユーザーがストックしている記事
-    func fetchUserStockItems() -> Observable<[Item]> {
-        return api.call(UserProfileRequest())
+    func fetchUserStockItems(userId: String) -> Observable<[Item]> {
+        return api.call(UserProfileRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
             }
@@ -49,11 +49,11 @@ class UserProfileViewModel {
     }
     
     // デコード処理
-    func toUser(data: Data) -> SpecifiedUser {
-        var items: SpecifiedUser {
-            return try! JSONDecoder().decode(SpecifiedUser.self, from: data)
+    func toUser(data: Data) -> User {
+        var user: User {
+            return try! JSONDecoder().decode(User.self, from: data)
         }
-        return items
+        return user
     }
     
     // デコード処理
@@ -61,14 +61,14 @@ class UserProfileViewModel {
         var items: [Item] {
             return try! JSONDecoder().decode([Item].self, from: data)
         }
-        return items
+        return Item
     }
     
     // デコード処理
     public func toItemTag(data: Data) -> [ItemTag] {
-        var items: [ItemTag] {
+        var tags: [ItemTag] {
             return try! JSONDecoder().decode([ItemTag].self, from: data)
         }
-        return items
+        return tags
     }
 }
