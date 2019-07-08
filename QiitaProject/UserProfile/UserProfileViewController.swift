@@ -33,6 +33,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     private let viewModel = UserProfileViewModel()
     private let disposeBag = DisposeBag()
     
+    var userId: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -42,7 +44,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     private func setupDataBinding() {
-        viewModel.fetchUserProfile()
+        viewModel.fetchUserProfile(userId: userId)
             .subscribe(onNext: { userProfile in
                 guard let usreProfileImageUrlString: String = userProfile.profileImageUrl else { return }
                 Nuke.loadImage(with: URL(string: usreProfileImageUrlString)!, into: self.userProfileImageView)
@@ -53,13 +55,13 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             })
             .disposed(by: disposeBag)
         
-        viewModel.fetchUserFolloingTags()
+        viewModel.fetchUserFolloingTags(userId: userId)
             .subscribe(onNext: { tags in
                 self.tagsCountLabel.text = tags.count.description
             })
             .disposed(by: disposeBag)
         
-        viewModel.fetchUserStockItems()
+        viewModel.fetchUserStockItems(userId: userId)
             .subscribe(onNext: { stockItems in
                 self.stockItemsCountLabel.text = stockItems.count.description
             })

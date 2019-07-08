@@ -61,7 +61,7 @@ class UserProfileViewModel {
         var items: [Item] {
             return try! JSONDecoder().decode([Item].self, from: data)
         }
-        return Item
+        return items
     }
     
     // デコード処理
