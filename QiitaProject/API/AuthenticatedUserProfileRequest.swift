@@ -8,20 +8,20 @@
 
 import Alamofire
 
-struct UserProfileRequest: RequestProtocol {
+struct AuthenticatedUserProfileRequest: RequestProtocol {
     
-    init(userId: String) {
-        self.userId = userId
+    init(accessToken: String) {
+        self.accessToken = accessToken
     }
     
-    var userId: String = ""
+    var accessToken: String = ""
     
     var method: HTTPMethod {
         return .get
     }
     
     var path: String {
-        return "/users/\(userId)/"
+        return "/users/\(accessToken)/"
     }
 }
 

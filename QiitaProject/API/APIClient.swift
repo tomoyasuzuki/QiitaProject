@@ -12,7 +12,7 @@ import Alamofire
 class API {
     static let clientId: String = "956b371103c3679441aee2b897bdf94eb6d28be8"
     static let clientSecret: String = "3f3fc429c399fbed68340b6a5d1c75d2ed877ac9"
-    static let redirectURL: String = "https://www.TomonariSuzukiredirect.com"
+    static let redirectURL: String = "https://www.tomonariSuzukiredirect.com"
     
     // リクエストメソッド
     func call<T: RequestProtocol>(_ request: T) -> Single<Data> {

@@ -13,7 +13,6 @@
 		57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */; };
 		571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */; };
 		571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */; };
-		571C18E222CC1C6200B73FB7 /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */; };
 		57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57313CE822C9BE62004DC569 /* extentionUIColor.swift */; };
 		5731462122C8AA50000E642B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731462022C8AA50000E642B /* AppDelegate.swift */; };
 		5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731462222C8AA50000E642B /* ItemsViewController.swift */; };
@@ -31,6 +30,8 @@
 		5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */; };
 		5731F98922D0172E00BC9F6D /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98822D0172E00BC9F6D /* TokenModel.swift */; };
 		5731F98B22D0175E00BC9F6D /* QiitaLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731F98A22D0175E00BC9F6D /* QiitaLoginViewModel.swift */; };
+		573E433622D4A1ED005CA9A8 /* TOPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573E433522D4A1ED005CA9A8 /* TOPViewController.swift */; };
+		573E433822D59821005CA9A8 /* Resouses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573E433722D59821005CA9A8 /* Resouses.swift */; };
 		5780498D22D1A6DA001F76C5 /* extentionURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780498C22D1A6DA001F76C5 /* extentionURL.swift */; };
 		5780499022D1CD71001F76C5 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780498F22D1CD71001F76C5 /* UserProfileViewController.swift */; };
 		5780499222D1CD7F001F76C5 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499122D1CD7F001F76C5 /* UserProfileViewModel.swift */; };
@@ -38,7 +39,7 @@
 		5780499622D2B0A5001F76C5 /* ItemTagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499522D2B0A5001F76C5 /* ItemTagModel.swift */; };
 		5780499822D2B41F001F76C5 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499722D2B41F001F76C5 /* RequestProtocol.swift */; };
 		5780499A22D2B4F3001F76C5 /* ItemsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499922D2B4F3001F76C5 /* ItemsRequest.swift */; };
-		5780499C22D2B683001F76C5 /* UserProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499B22D2B683001F76C5 /* UserProfileRequest.swift */; };
+		5780499C22D2B683001F76C5 /* AuthenticatedUserProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499B22D2B683001F76C5 /* AuthenticatedUserProfileRequest.swift */; };
 		5780499E22D2BB01001F76C5 /* OauthLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499D22D2BB01001F76C5 /* OauthLoginRequest.swift */; };
 		578049A022D3724E001F76C5 /* UserFollowingTagsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5780499F22D3724E001F76C5 /* UserFollowingTagsRequest.swift */; };
 		578049A222D372D0001F76C5 /* UserStocksRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578049A122D372D0001F76C5 /* UserStocksRequest.swift */; };
@@ -53,7 +54,6 @@
 		57154B9F22CAD17D00EF7FCF /* QiitaLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaLoginViewController.swift; sourceTree = "<group>"; };
 		571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
 		571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
-		571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
 		57313CE822C9BE62004DC569 /* extentionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionUIColor.swift; sourceTree = "<group>"; };
 		5731461D22C8AA50000E642B /* QiitaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiitaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5731462022C8AA50000E642B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +73,8 @@
 		5731F98022CC40ED00BC9F6D /* itemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemTableViewCell.swift; sourceTree = "<group>"; };
 		5731F98822D0172E00BC9F6D /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		5731F98A22D0175E00BC9F6D /* QiitaLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaLoginViewModel.swift; sourceTree = "<group>"; };
+		573E433522D4A1ED005CA9A8 /* TOPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOPViewController.swift; sourceTree = "<group>"; };
+		573E433722D59821005CA9A8 /* Resouses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resouses.swift; sourceTree = "<group>"; };
 		5780498C22D1A6DA001F76C5 /* extentionURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionURL.swift; sourceTree = "<group>"; };
 		5780498F22D1CD71001F76C5 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		5780499122D1CD7F001F76C5 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
@@ -80,7 +82,7 @@
 		5780499522D2B0A5001F76C5 /* ItemTagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTagModel.swift; sourceTree = "<group>"; };
 		5780499722D2B41F001F76C5 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		5780499922D2B4F3001F76C5 /* ItemsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsRequest.swift; sourceTree = "<group>"; };
-		5780499B22D2B683001F76C5 /* UserProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRequest.swift; sourceTree = "<group>"; };
+		5780499B22D2B683001F76C5 /* AuthenticatedUserProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedUserProfileRequest.swift; sourceTree = "<group>"; };
 		5780499D22D2BB01001F76C5 /* OauthLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthLoginRequest.swift; sourceTree = "<group>"; };
 		5780499F22D3724E001F76C5 /* UserFollowingTagsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowingTagsRequest.swift; sourceTree = "<group>"; };
 		578049A122D372D0001F76C5 /* UserStocksRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStocksRequest.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				5731465122C9080D000E642B /* API */,
 				5731464E22C907E0000E642B /* Model */,
+				573E433222D4A199005CA9A8 /* TOP */,
 				5731F98522CC46DF00BC9F6D /* Login */,
 				5731F98422CC46C700BC9F6D /* items */,
 				5731F98722CC470900BC9F6D /* ItemDetail */,
@@ -173,7 +176,7 @@
 				5731463422C8AB7F000E642B /* APIClient.swift */,
 				5780499722D2B41F001F76C5 /* RequestProtocol.swift */,
 				5780499922D2B4F3001F76C5 /* ItemsRequest.swift */,
-				5780499B22D2B683001F76C5 /* UserProfileRequest.swift */,
+				5780499B22D2B683001F76C5 /* AuthenticatedUserProfileRequest.swift */,
 				578049A322D37307001F76C5 /* UserFolloweesRequest.swift */,
 				578049A522D37330001F76C5 /* UserFollowersRequest.swift */,
 				578049A122D372D0001F76C5 /* UserStocksRequest.swift */,
@@ -191,6 +194,7 @@
 				5731464A22C900DA000E642B /* extentionDate.swift */,
 				57313CE822C9BE62004DC569 /* extentionUIColor.swift */,
 				5780498C22D1A6DA001F76C5 /* extentionURL.swift */,
+				573E433722D59821005CA9A8 /* Resouses.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -218,9 +222,16 @@
 			isa = PBXGroup;
 			children = (
 				571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */,
-				571C18E122CC1C6200B73FB7 /* ItemDetailViewModel.swift */,
 			);
 			path = ItemDetail;
+			sourceTree = "<group>";
+		};
+		573E433222D4A199005CA9A8 /* TOP */ = {
+			isa = PBXGroup;
+			children = (
+				573E433522D4A1ED005CA9A8 /* TOPViewController.swift */,
+			);
+			path = TOP;
 			sourceTree = "<group>";
 		};
 		5780498E22D1CD4F001F76C5 /* UserProfile */ = {
@@ -356,10 +367,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				573E433622D4A1ED005CA9A8 /* TOPViewController.swift in Sources */,
 				578049A822D37412001F76C5 /* AccessTokenRequest.swift in Sources */,
 				5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */,
 				5780499E22D2BB01001F76C5 /* OauthLoginRequest.swift in Sources */,
 				5731F98922D0172E00BC9F6D /* TokenModel.swift in Sources */,
+				573E433822D59821005CA9A8 /* Resouses.swift in Sources */,
 				5780498D22D1A6DA001F76C5 /* extentionURL.swift in Sources */,
 				57154BA022CAD17D00EF7FCF /* QiitaLoginViewController.swift in Sources */,
 				5780499822D2B41F001F76C5 /* RequestProtocol.swift in Sources */,
@@ -368,7 +381,7 @@
 				5731463B22C8B2B7000E642B /* UserModel.swift in Sources */,
 				5731463322C8AAC7000E642B /* ItemModel.swift in Sources */,
 				5731464922C8FD69000E642B /* extentionString.swift in Sources */,
-				5780499C22D2B683001F76C5 /* UserProfileRequest.swift in Sources */,
+				5780499C22D2B683001F76C5 /* AuthenticatedUserProfileRequest.swift in Sources */,
 				578049A422D37307001F76C5 /* UserFolloweesRequest.swift in Sources */,
 				57154B9E22CAD0CB00EF7FCF /* AuthenticatedUserModel.swift in Sources */,
 				571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */,
@@ -378,7 +391,6 @@
 				5780499A22D2B4F3001F76C5 /* ItemsRequest.swift in Sources */,
 				5731463722C8B271000E642B /* GroupModel.swift in Sources */,
 				5731F98B22D0175E00BC9F6D /* QiitaLoginViewModel.swift in Sources */,
-				571C18E222CC1C6200B73FB7 /* ItemDetailViewModel.swift in Sources */,
 				57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */,
 				5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */,
 				5780499622D2B0A5001F76C5 /* ItemTagModel.swift in Sources */,

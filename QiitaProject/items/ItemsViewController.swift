@@ -12,6 +12,9 @@ import RxCocoa
 import Nuke
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    // - property
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -20,6 +23,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     fileprivate let refresh = UIRefreshControl()
     
     private let defaultNumberOfRows = 10
+    
+    // - lifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

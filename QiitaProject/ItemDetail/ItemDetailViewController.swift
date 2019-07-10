@@ -10,6 +10,9 @@ import UIKit
 import WebKit
 
 class ItemDetailViewController: UIViewController, WKNavigationDelegate {
+    
+    // - property
+    
     @IBOutlet weak var webView: WKWebView! {
         didSet {
             webView.navigationDelegate = self
@@ -19,32 +22,35 @@ class ItemDetailViewController: UIViewController, WKNavigationDelegate {
     var urlString: String =  ""
     var titleString: String = ""
     
+    // - lifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.navigationDelegate = self
-        print(webView)
+        navigationItem.title = titleString
+        navigationItem.backBarButtonItem?.title = Resourses.string.backButtonTitle
         
-        toItemPage(urlString: urlString)
+        webView.navigationDelegate = self
+        
+        navigateToItemPage(urlString: urlString)
     }
 }
 
 private extension ItemDetailViewController {
-    private func toItemPage(urlString: String) {
+    
+    // - navigation
+    
+    private func navigateToItemPage(urlString: String) {
         guard let url = URL(string: urlString) else { return }
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
     }
     
+    // - webView
+    
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("リクエスト前")
-        
-        /*  これを設定しないとアプリがクラッシュする
-         *  .allow  : 読み込み許可
-         *  .cancel : 読み込みキャンセル
-         */
         decisionHandler(.allow)
     }
 }

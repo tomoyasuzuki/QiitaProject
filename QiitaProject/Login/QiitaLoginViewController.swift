@@ -15,7 +15,7 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     @IBOutlet var webView: WKWebView!
     
     let viewModel = QiitaLoginViewModel()
-    let disoposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     var accesToken: String = ""
     var authCode: String = ""
     
@@ -32,45 +32,41 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
 
 // - dataBinding
 
-private extension QiitaLoginViewController {
+extension QiitaLoginViewController {
     private func setupDataBinding() {
-        // dataBinding
+        // アクセストークン取得
+        viewModel.getAccessToken(authCode: authCode)
+            .subscribe(onNext: { token in
+                self.accesToken = token.token
+            })
+            .disposed(by: disposeBag)
     }
 }
 
 // - webViewDelegate
 
-private extension QiitaLoginViewController {
+extension QiitaLoginViewController {
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        if webView.url?.absoluteString == API.redirectURL {
-            // この処理は結局いつ呼ばれるのかどうか？
-            dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if  let url = navigationAction.request.url?.absoluteString {
-            if url == API.redirectURL {
-                // リダイレクトをキャンセル
-                decisionHandler(WKNavigationActionPolicy.cancel)
-                // 認証コード取得
-                guard let code = getParameter(url: url, param: "code") else { return }
-                self.authCode = code
-                // アクセストークン取得
-                viewModel.getAccessToken(authCode: authCode)
-                    
-                // webViewを閉じる
-                dismiss(animated: true, completion: nil)
-            }
+        if let url = webView.url?.absoluteString {
+            // 認証コード取得
+            guard let code = getParameter(url: url, param: "code") else { return }
+            self.authCode = code
+            // webViewを閉じる
+            //            dismiss(animated: true, completion: nil)
+            print(url)
+            print("code取得：\(authCode)")
+            
+            // 画面遷移
+            performSegue(withIdentifier: "toUserProfile", sender: (accesToken))
         } else {
-            print("unexpected redirect url")
+            // 例外処理？
         }
     }
 }
 
 // - function
 
-private extension QiitaLoginViewController {
+extension QiitaLoginViewController {
     private func toOauth() {
         let request = OauthLoginRequest()
         let url = URL(string: request.baseURL + request.path)
@@ -82,5 +78,16 @@ private extension QiitaLoginViewController {
         guard let url = URLComponents(string: url) else { return nil }
         // パラメータのnameがparamに初めて一致した時のvalueを取り出している
         return url.queryItems?.first(where: { $0.name == param })!.value! ?? ""
+    }
+}
+
+// - segue
+
+extension QiitaLoginViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toUserProfile" {
+            let vc = segue.destination as! UserProfileViewController
+            vc.accessToken = sender as! String
+        }
     }
 }

@@ -6,16 +6,16 @@
 //  Copyright © 2019 tomoya.suzuki. All rights reserved.
 //
 
-struct AuthenticatedUser {
+struct AuthenticatedUser: Codable {
     let itemsDescription, facebookID: String?
     let followeesCount, followersCount: Int?
     let githubLoginName, id: String?
     let itemsCount: Int?
-    let linkedinID, location, name, organization: String?
-    let permanentID: Int?
-    let profileImageURL: String?
+    let linkedinId, location, name, organization: String?
+    let permanentId: Int?
+    let profileImageUrl: String?
     let teamOnly: Bool?
     let twitterScreenName: String?
-    let websiteURL: String?
+    let websiteUrl: String?
     let imageMonthlyUploadLimit, imageMonthlyUploadRemaining: Int?
 }

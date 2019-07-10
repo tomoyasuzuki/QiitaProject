@@ -33,23 +33,29 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     private let viewModel = UserProfileViewModel()
     private let disposeBag = DisposeBag()
     
+    // アクセストークンに紐づいてユーザを取得可能だが、ユーザをフォローしているユーザーやユーザーのフォロワーの情報はusridを保持しておかないと取得できない
     var userId: String = ""
+    var accessToken: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        print(accessToken)
 
         setupDataBinding()
     }
     
     private func setupDataBinding() {
-        viewModel.fetchUserProfile(userId: userId)
+        viewModel.fetchUserProfile(accessToken: accessToken)
             .subscribe(onNext: { userProfile in
+                print("認証ユーザー取得：\(userProfile))")
                 guard let usreProfileImageUrlString: String = userProfile.profileImageUrl else { return }
                 Nuke.loadImage(with: URL(string: usreProfileImageUrlString)!, into: self.userProfileImageView)
                 
                 self.userNameLabel.text = userProfile.name
+                self.userId = userProfile.id!
                 self.followeeCountLabel.text = userProfile.followeesCount?.description
                 self.followerCountLabel.text = userProfile.followersCount?.description
             })

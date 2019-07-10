@@ -14,13 +14,12 @@ class QiitaLoginViewModel {
     // アクセストークンの保持
     var accessToken: String = ""
     
-    func getAccessToken(authCode: String) {
-        api.call(AccessTokenRequest(code: authCode))
+    func getAccessToken(authCode: String) -> Observable<Token> {
+        return api.call(AccessTokenRequest(code: authCode))
             .asObservable()
             .map { data in self.toToken(data: data)}
             .do(onNext: { token in
                 self.accessToken = token.token
-                print("accesstoken: \(self.accessToken)")
             })
     }
 }

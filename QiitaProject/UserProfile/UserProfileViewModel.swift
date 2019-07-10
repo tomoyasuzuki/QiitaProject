@@ -18,19 +18,19 @@ class UserProfileViewModel {
     
     private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     private var isLoadingObservable: Observable<Bool> { return self.isLoadingRelay.asObservable() }
-    // ユーザープロフィール
-    func fetchUserProfile(userId: String) -> Observable<User> {
-        return api.call(UserProfileRequest(userId: userId))
+    // 認証ユーザープロフィールを取得
+    func fetchUserProfile(accessToken: String) -> Observable<AuthenticatedUser> {
+        return api.call(AuthenticatedUserProfileRequest(accessToken: accessToken))
             .do {
                 self.isLoadingRelay.accept(true)
             }
             .asObservable()
-            .map { data in self.toUser(data: data) }
+            .map { data in try! JSONDecoder().decode(AuthenticatedUser.self, from: data)}
     }
     
     // ユーザーがフォローしているタグ
     func fetchUserFolloingTags(userId: String) -> Observable<[ItemTag]> {
-        return api.call(UserProfileRequest(userId: userId))
+        return api.call(UserFollowingTagsRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
             }
@@ -40,7 +40,7 @@ class UserProfileViewModel {
     
     // ユーザーがストックしている記事
     func fetchUserStockItems(userId: String) -> Observable<[Item]> {
-        return api.call(UserProfileRequest(userId: userId))
+        return api.call(UserStocksRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
             }
