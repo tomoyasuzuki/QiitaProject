@@ -13,12 +13,12 @@ import RxCocoa
 class UserProfileViewModel {
     let api = API()
     
-    // viewControllerから渡してもらう
     let acccessToken: String = ""
     
     private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     private var isLoadingObservable: Observable<Bool> { return self.isLoadingRelay.asObservable() }
-    // 認証ユーザープロフィールを取得
+    
+    // 認証ユーザー取得
     func fetchUserProfile(accessToken: String) -> Observable<AuthenticatedUser> {
         return api.call(AuthenticatedUserProfileRequest(accessToken: accessToken))
             .do {
@@ -28,47 +28,23 @@ class UserProfileViewModel {
             .map { data in try! JSONDecoder().decode(AuthenticatedUser.self, from: data)}
     }
     
-    // ユーザーがフォローしているタグ
+    // フォローしているタグ取得
     func fetchUserFolloingTags(userId: String) -> Observable<[ItemTag]> {
         return api.call(UserFollowingTagsRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
             }
             .asObservable()
-            .map { data in self.toItemTag(data: data) }
+            .map { data in try! JSONDecoder().decode([ItemTag].self, from: data) }
     }
     
-    // ユーザーがストックしている記事
+    // ストック記事取得
     func fetchUserStockItems(userId: String) -> Observable<[Item]> {
         return api.call(UserStocksRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
             }
             .asObservable()
-            .map { data in self.toItem(data: data) }
-    }
-    
-    // デコード処理
-    func toUser(data: Data) -> User {
-        var user: User {
-            return try! JSONDecoder().decode(User.self, from: data)
-        }
-        return user
-    }
-    
-    // デコード処理
-    public func toItem(data: Data) -> [Item] {
-        var items: [Item] {
-            return try! JSONDecoder().decode([Item].self, from: data)
-        }
-        return items
-    }
-    
-    // デコード処理
-    public func toItemTag(data: Data) -> [ItemTag] {
-        var tags: [ItemTag] {
-            return try! JSONDecoder().decode([ItemTag].self, from: data)
-        }
-        return tags
+            .map { data in try! JSONDecoder().decode([Item].self, from: data) }
     }
 }

@@ -14,12 +14,9 @@ class TOPViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func login(_ sender: Any) {
-        performSegue(withIdentifier: "toWebView", sender: nil)
+        performSegue(withIdentifier: Resourses.string.toWebView, sender: nil)
     }
-    
 }

@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.isHidden = true
         
-        tableView.register(itemTableViewCell.self, forCellReuseIdentifier: "itemTableViewCell")
+        tableView.register(itemTableViewCell.self, forCellReuseIdentifier: Resourses.string.itemTableViewCell)
         
         setupDataBinding()
     }
@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemTableViewCell", for: indexPath) as! itemTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resourses.string.itemTableViewCell, for: indexPath) as! itemTableViewCell
         cell.bind(items: viewModel.items, indexPath: indexPath)
         return cell
     }
@@ -68,7 +68,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         guard let title = item.title, let url = item.url else { return }
 
         // 画面遷移
-        performSegue(withIdentifier: "toItemDetail", sender: (title, url))
+        performSegue(withIdentifier: Resourses.string.toItemDetail, sender: (title, url))
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toItemDetail" {
+        if segue.identifier == Resourses.string.toItemDetail {
             let vc = segue.destination as! ItemDetailViewController
             (vc.titleString, vc.urlString) = sender as! (String, String)
         }

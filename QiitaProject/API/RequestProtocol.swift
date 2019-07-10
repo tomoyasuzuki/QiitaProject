@@ -15,7 +15,6 @@ protocol RequestProtocol {
     var parameters: Parameters? { get }
 }
 
-
 extension RequestProtocol {
     var baseURL: String {
         return "https://qiita.com/api/v2"

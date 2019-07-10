@@ -11,7 +11,7 @@ import WebKit
 
 class ItemDetailViewController: UIViewController, WKNavigationDelegate {
     
-    // - property
+// - Property
     
     @IBOutlet weak var webView: WKWebView! {
         didSet {
@@ -22,7 +22,7 @@ class ItemDetailViewController: UIViewController, WKNavigationDelegate {
     var urlString: String =  ""
     var titleString: String = ""
     
-    // - lifeCycle
+// - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class ItemDetailViewController: UIViewController, WKNavigationDelegate {
 
 private extension ItemDetailViewController {
     
-    // - navigation
+// - Navigation
     
     private func navigateToItemPage(urlString: String) {
         guard let url = URL(string: urlString) else { return }
@@ -46,7 +46,7 @@ private extension ItemDetailViewController {
         webView.load(urlRequest)
     }
     
-    // - webView
+// - WebViewDelegate
     
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,

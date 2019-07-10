@@ -12,13 +12,6 @@ import Alamofire
 
 // 下記記事を参照
 // https://qiita.com/KosukeOhmura/items/8b65bdb63da6df95c7a3
-/*
- 
- 同一キーなクエリを追加する必要がある場合
- String? 以外の型のまま追加したくなる場合
- には対応できないが今回は採用する
- 
- */
 
 extension URL {
     func withParams(name: String?, value: String?) -> URL? {

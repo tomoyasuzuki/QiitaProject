@@ -26,17 +26,9 @@ class ItemsViewModel {
             .do {
                 self.isLoadingRelay.accept(true)
             }
-            .map { data in self.toItem(data: data) }
+            .map { data in try! JSONDecoder().decode([Item].self, from: data) }
             .do(onNext: { items in
                 self.items = items
             })
-    }
-    
-    // デコード処理
-    public func toItem(data: Data) -> [Item] {
-        var items: [Item] {
-            return try! JSONDecoder().decode([Item].self, from: data)
-        }
-        return items
     }
 }

@@ -30,34 +30,38 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tagsCountLabel: UILabel!
     @IBOutlet weak var tagsTitleLabel: UILabel!
     
+    // - Property
+    
     private let viewModel = UserProfileViewModel()
     private let disposeBag = DisposeBag()
     
-    // アクセストークンに紐づいてユーザを取得可能だが、ユーザをフォローしているユーザーやユーザーのフォロワーの情報はusridを保持しておかないと取得できない
     var userId: String = ""
     var accessToken: String = ""
+    
+    // - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
-        print(accessToken)
 
         setupDataBinding()
     }
     
+    // - DataBinding
+    
     private func setupDataBinding() {
         viewModel.fetchUserProfile(accessToken: accessToken)
             .subscribe(onNext: { userProfile in
-                print("認証ユーザー取得：\(userProfile))")
+                self.userNameLabel.text = userProfile.name
+                self.followeeCountLabel.text = userProfile.followeesCount?.description
+                self.followerCountLabel.text = userProfile.followersCount?.description
+                
                 guard let usreProfileImageUrlString: String = userProfile.profileImageUrl else { return }
                 Nuke.loadImage(with: URL(string: usreProfileImageUrlString)!, into: self.userProfileImageView)
                 
-                self.userNameLabel.text = userProfile.name
-                self.userId = userProfile.id!
-                self.followeeCountLabel.text = userProfile.followeesCount?.description
-                self.followerCountLabel.text = userProfile.followersCount?.description
+                guard let userId = userProfile.id else { return }
+                self.userId = userId
             })
             .disposed(by: disposeBag)
         
@@ -73,6 +77,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             })
             .disposed(by: disposeBag)
     }
+    
+    // - Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  10

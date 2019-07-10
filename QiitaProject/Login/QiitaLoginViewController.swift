@@ -14,23 +14,27 @@ import RxSwift
 class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     @IBOutlet var webView: WKWebView!
     
+// - Property
+    
     let viewModel = QiitaLoginViewModel()
     let disposeBag = DisposeBag()
     var accesToken: String = ""
     var authCode: String = ""
+    
+// - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         webView.navigationDelegate = self
         
-        toOauth()
+        navigateToOauth()
         
         setupDataBinding()
     }
 }
 
-// - dataBinding
+// - DataBinding
 
 extension QiitaLoginViewController {
     private func setupDataBinding() {
@@ -43,34 +47,28 @@ extension QiitaLoginViewController {
     }
 }
 
-// - webViewDelegate
+// - Delegate
 
 extension QiitaLoginViewController {
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         if let url = webView.url?.absoluteString {
-            // 認証コード取得
             guard let code = getParameter(url: url, param: "code") else { return }
             self.authCode = code
-            // webViewを閉じる
-            //            dismiss(animated: true, completion: nil)
-            print(url)
-            print("code取得：\(authCode)")
-            
-            // 画面遷移
-            performSegue(withIdentifier: "toUserProfile", sender: (accesToken))
+
+            performSegue(withIdentifier: Resourses.string.toUserProfile, sender: (accesToken))
         } else {
-            // 例外処理？
+            
         }
     }
 }
 
-// - function
+// - Function
 
 extension QiitaLoginViewController {
-    private func toOauth() {
+    private func navigateToOauth() {
         let request = OauthLoginRequest()
         let url = URL(string: request.baseURL + request.path)
-        let urlRequest = URLRequest(url: (url?.queryItemAdded([URLQueryItem(name: "client_id", value: API.clientId), URLQueryItem(name: "client_secret", value: API.clientSecret)]))!)
+        let urlRequest = URLRequest(url: (url?.queryItemAdded([URLQueryItem(name: Resourses.string.clientId, value: API.clientId), URLQueryItem(name: Resourses.string.clientSecret, value: API.clientSecret)]))!)
         webView.load(urlRequest)
     }
     
@@ -81,11 +79,11 @@ extension QiitaLoginViewController {
     }
 }
 
-// - segue
+// - Segue
 
 extension QiitaLoginViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toUserProfile" {
+        if segue.identifier == Resourses.string.toUserProfile {
             let vc = segue.destination as! UserProfileViewController
             vc.accessToken = sender as! String
         }

@@ -79,14 +79,14 @@ class itemTableViewCell: UITableViewCell {
         // タイトル
         titleLabel.text = items[indexPath.row].title
         // タグタイトル
-        tagTitleLabel.text = "タグ"
+        tagTitleLabel.text = Resourses.string.tagTitle
         // 作成者名
         userNameLabel.text = items[indexPath.row].user?.name
         // タグ
         if let tags = items[indexPath.row].tags {
             tagDescriptionLabel.text = tagDescription(tags: tags)
         } else {
-            tagDescriptionLabel.text = "タグがありません"
+            tagDescriptionLabel.text = Resourses.string.tagEmptyDescription
         }
         // 作成日時
         createdAtLabel.text = items[indexPath.row].createdAt.toDate().toString()
