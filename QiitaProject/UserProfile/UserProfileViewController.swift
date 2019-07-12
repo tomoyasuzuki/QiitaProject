@@ -13,6 +13,8 @@ import Nuke
 
 class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+   // - Property
+    
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var border: UIView!
@@ -30,13 +32,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tagsCountLabel: UILabel!
     @IBOutlet weak var tagsTitleLabel: UILabel!
     
-    // - Property
-    
     private let viewModel = UserProfileViewModel()
     private let disposeBag = DisposeBag()
     
     var userId: String = ""
     var accessToken: String = ""
+    var itemsCount: Int = 0
     
     // - LifeCycle
     
@@ -62,6 +63,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 guard let userId = userProfile.id else { return }
                 self.userId = userId
+                
+                guard let itemsCount = userProfile.itemsCount else { return }
+                self.itemsCount = itemsCount
             })
             .disposed(by: disposeBag)
         
@@ -81,7 +85,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     // - Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  10
+        return  self.itemsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

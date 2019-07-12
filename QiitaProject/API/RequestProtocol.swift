@@ -13,6 +13,7 @@ protocol RequestProtocol {
     var path: String { get }
     var httpHeaders: HTTPHeaders? { get }
     var parameters: Parameters? { get }
+    var headers: HTTPHeaders? { get }
 }
 
 extension RequestProtocol {
@@ -24,6 +25,10 @@ extension RequestProtocol {
     }
     
     var parameters: Parameters? {
+        return nil
+    }
+    
+    var headers: HTTPHeaders? {
         return nil
     }
 }

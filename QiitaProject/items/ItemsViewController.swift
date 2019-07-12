@@ -23,8 +23,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     fileprivate let refresh = UIRefreshControl()
     
     private let defaultNumberOfRows = 10
+    private var isLastCell: Bool = false
     
-    // - lifeCycle
+    // - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshTableView(_ :)), for: .valueChanged)
-        
-        tableView.isHidden = true
         
         tableView.register(itemTableViewCell.self, forCellReuseIdentifier: Resourses.string.itemTableViewCell)
         
@@ -75,7 +74,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 最下部のセルを検知
         let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
         if indexPath.row == lastCellRow {
-            // 追加でAPIを叩く
+            self.isLastCell = true
+        } else {
+            self.isLastCell = false
         }
     }
     
@@ -84,7 +85,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     private func setupDataBinding() {
         viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
             .subscribe(onNext: { _ in
-                self.tableView.isHidden = false
                 self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -96,6 +96,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 } else {
                     // Progress非表示
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.fetchMoreItems(isLastCell: Observable.of(self.isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())?
+            .subscribe(onNext: { items in
+                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }

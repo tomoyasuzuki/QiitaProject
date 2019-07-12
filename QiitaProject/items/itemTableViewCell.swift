@@ -49,7 +49,7 @@ class itemTableViewCell: UITableViewCell {
         UIImageView()
     }()
     
-    // - initialize
+    // - Initialize
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -65,7 +65,6 @@ class itemTableViewCell: UITableViewCell {
         contentView.addSubview(userImageView)
         
         setupUIComponents()
-        
         setupConstraints()
     }
     
@@ -73,7 +72,7 @@ class itemTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // - bind
+    // - DataBinding
     
     func bind(items: [Item], indexPath: IndexPath) {
         // タイトル
@@ -118,7 +117,7 @@ class itemTableViewCell: UITableViewCell {
         userImageView.backgroundColor = UIColor.gray
     }
     
-    // - constraint
+    // - Constraint
     
     private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
@@ -157,7 +156,7 @@ class itemTableViewCell: UITableViewCell {
         }
     }
     
-    // - function
+    // - Function
     
     private func tagDescription(tags: [Tag]) -> String {
         var tagNames: [String] = []

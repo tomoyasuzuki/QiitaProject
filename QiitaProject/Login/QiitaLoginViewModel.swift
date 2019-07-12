@@ -17,18 +17,10 @@ class QiitaLoginViewModel {
     func getAccessToken(authCode: String) -> Observable<Token> {
         return api.call(AccessTokenRequest(code: authCode))
             .asObservable()
-            .map { data in self.toToken(data: data)}
+            .map { data in try! JSONDecoder().decode(Token.self, from: data) }
             .do(onNext: { token in
                 self.accessToken = token.token
             })
     }
 }
 
-private extension QiitaLoginViewModel {
-    private func toToken(data: Data) -> Token {
-        var token: Token {
-             return try! JSONDecoder().decode(Token.self, from: data)
-        }
-        return token
-    }
-}

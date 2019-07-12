@@ -10,9 +10,10 @@ import RxSwift
 import Alamofire
 
 class API {
-    static let clientId: String = Resourses.string.clientId
-    static let clientSecret: String = Resourses.string.clientSecret
-    static let redirectURL: String = Resourses.string.redirectURL
+    static let baseURL = "https://qiita.com/api/v2"
+    static let clientId = "956b371103c3679441aee2b897bdf94eb6d28be8"
+    static let clientSecret = "3f3fc429c399fbed68340b6a5d1c75d2ed877ac"
+    static let redirectURL = "https://www.tomonariSuzukiredirect.com"
     
     func call<T: RequestProtocol>(_ request: T) -> Single<Data> {
         return Single.create { (observer) -> Disposable in

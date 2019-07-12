@@ -10,7 +10,6 @@ import UIKit
 
 class TOPViewController: ViewController {
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var itemsTabButton: UITabBarItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()

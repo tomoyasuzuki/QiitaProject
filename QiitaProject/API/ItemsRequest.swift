@@ -9,11 +9,15 @@ import Alamofire
 
 struct ItemsRequest: RequestProtocol {
     
-    init(query: String) {
+    init(query: String, page: Int, perPage: Int){
         self.query = query
     }
     
     var query: String = ""
+    
+    var page: Int = 0
+    
+    var perPage: Int = 0
     
     var method: HTTPMethod {
         return .get
@@ -24,6 +28,6 @@ struct ItemsRequest: RequestProtocol {
     }
     
     var parameters: Parameters? {
-        return ["query": "\(query)"]
+        return ["query": "\(query)","page": page, "per_page": perPage]
     }
 }

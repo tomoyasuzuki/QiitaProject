@@ -38,12 +38,7 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
 
 extension QiitaLoginViewController {
     private func setupDataBinding() {
-        // アクセストークン取得
-        viewModel.getAccessToken(authCode: authCode)
-            .subscribe(onNext: { token in
-                self.accesToken = token.token
-            })
-            .disposed(by: disposeBag)
+    
     }
 }
 
@@ -54,7 +49,16 @@ extension QiitaLoginViewController {
         if let url = webView.url?.absoluteString {
             guard let code = getParameter(url: url, param: "code") else { return }
             self.authCode = code
-
+            print("get code")
+            
+            // アクセストークン取得
+            viewModel.getAccessToken(authCode: authCode)
+                .subscribe(onNext: { token in
+                    self.accesToken = token.token
+                    print("get accesstoken")
+                })
+                .disposed(by: disposeBag)
+            
             performSegue(withIdentifier: Resourses.string.toUserProfile, sender: (accesToken))
         } else {
             

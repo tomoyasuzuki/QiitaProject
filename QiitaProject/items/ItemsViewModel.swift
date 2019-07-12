@@ -22,7 +22,7 @@ class ItemsViewModel {
          return observable
             .debounce(0.5, scheduler: MainScheduler.instance)
             .filter { $0.count >= 2 }
-            .flatMap { self.api.call(ItemsRequest(query: $0))}
+            .flatMap { self.api.call(ItemsRequest(query: $0,page: 1, perPage: 20))}
             .do {
                 self.isLoadingRelay.accept(true)
             }
@@ -30,5 +30,20 @@ class ItemsViewModel {
             .do(onNext: { items in
                 self.items = items
             })
+    }
+    
+    func fetchMoreItems(isLastCell: Observable<Bool>, observable: Observable<String>) -> Observable<[Item]>? {
+            return observable
+                .debounce(0.5, scheduler: MainScheduler.instance)
+                .filter { $0.count >= 2 }
+                .flatMap { self.api.call(ItemsRequest(query: $0,page: 1, perPage: 20)) }
+                .do {
+                    self.isLoadingRelay.accept(true)
+                    print("fetchmoreitems")
+                }
+                .map { data in try! JSONDecoder().decode([Item].self, from: data) }
+                .do(onNext: { items in
+                    self.items = items
+                })
     }
 }

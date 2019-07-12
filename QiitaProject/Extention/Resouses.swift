@@ -12,10 +12,8 @@ import UIKit
 struct Resourses {
     internal struct string {
         // URL
-        static let baseURL = "https://qiita.com/api/v2"
-        static let redirectURL = "https://www.tomonariSuzukiredirect.com"
-        static let clientId = "956b371103c3679441aee2b897bdf94eb6d28be8"
-        static let clientSecret = "3f3fc429c399fbed68340b6a5d1c75d2ed877ac9"
+        static let clientId = "client_id"
+        static let clientSecret = "client_secret"
         
         // button
         static let backButtonTitle = "戻る"
