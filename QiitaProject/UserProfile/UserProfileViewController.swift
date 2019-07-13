@@ -35,8 +35,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     private let viewModel = UserProfileViewModel()
     private let disposeBag = DisposeBag()
     
-    var userId: String = ""
-    var accessToken: String = ""
     var itemsCount: Int = 0
     
     // - LifeCycle
@@ -52,7 +50,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     // - DataBinding
     
     private func setupDataBinding() {
-        viewModel.fetchUserProfile(accessToken: accessToken)
+        viewModel.fetchUserProfile()?
             .subscribe(onNext: { userProfile in
                 self.userNameLabel.text = userProfile.name
                 self.followeeCountLabel.text = userProfile.followeesCount?.description
@@ -61,21 +59,18 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 guard let usreProfileImageUrlString: String = userProfile.profileImageUrl else { return }
                 Nuke.loadImage(with: URL(string: usreProfileImageUrlString)!, into: self.userProfileImageView)
                 
-                guard let userId = userProfile.id else { return }
-                self.userId = userId
-                
                 guard let itemsCount = userProfile.itemsCount else { return }
                 self.itemsCount = itemsCount
             })
             .disposed(by: disposeBag)
         
-        viewModel.fetchUserFolloingTags(userId: userId)
+        viewModel.fetchUserFolloingTags()?
             .subscribe(onNext: { tags in
                 self.tagsCountLabel.text = tags.count.description
             })
             .disposed(by: disposeBag)
         
-        viewModel.fetchUserStockItems(userId: userId)
+        viewModel.fetchUserStockItems()?
             .subscribe(onNext: { stockItems in
                 self.stockItemsCountLabel.text = stockItems.count.description
             })

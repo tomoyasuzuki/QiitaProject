@@ -36,6 +36,12 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
 
 extension QiitaLoginViewController {
     private func setupDataBinding() {
+        // アクセストークン取得
+        viewModel.getAccessToken()?
+            .subscribe(onNext: { token in
+                self.performSegue(withIdentifier: Resourses.string.toUserProfile, sender: nil)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -45,12 +51,8 @@ extension QiitaLoginViewController {
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         if let url = webView.url?.absoluteString {
             guard let code = getParameter(url: url, param: "code") else { return }
-            // アクセストークン取得
-            viewModel.getAccessToken(authCode: code)
-                .subscribe(onNext: { token in
-                    self.performSegue(withIdentifier: Resourses.string.toUserProfile, sender: (token.token))
-                })
-                .disposed(by: disposeBag)
+            
+            UserDefaults.standard.set(code, forKey: "authCode")
         }
     }
 }
@@ -69,16 +71,5 @@ extension QiitaLoginViewController {
         guard let url = URLComponents(string: url) else { return nil }
         // パラメータのnameがparamに初めて一致した時のvalueを取り出している
         return url.queryItems?.first(where: { $0.name == param })!.value! ?? ""
-    }
-}
-
-// - Segue
-
-extension QiitaLoginViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Resourses.string.toUserProfile {
-            let vc = segue.destination as! UserProfileViewController
-            vc.accessToken = sender as! String
-        }
     }
 }

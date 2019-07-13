@@ -11,16 +11,17 @@ import RxSwift
 
 class QiitaLoginViewModel {
     let api = API()
-    // アクセストークンの保持
-    var accessToken: String = ""
-    
-    func getAccessToken(authCode: String) -> Observable<Token> {
+
+    func getAccessToken() -> Observable<Token>? {
+        guard let authCode = UserDefaults.standard.string(forKey: "authCode") else { return nil }
+        
         return api.call(AccessTokenRequest(code: authCode))
             .asObservable()
             .map { data in try! JSONDecoder().decode(Token.self, from: data) }
             .do(onNext: { token in
-                self.accessToken = token.token
-            })
+                UserDefaults.standard.setValue(token.token, forKey: "accessToken")
+            }
+        )
     }
 }
 

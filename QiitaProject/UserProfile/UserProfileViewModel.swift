@@ -13,13 +13,13 @@ import RxCocoa
 class UserProfileViewModel {
     let api = API()
     
-    let acccessToken: String = ""
-    
     private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     private var isLoadingObservable: Observable<Bool> { return self.isLoadingRelay.asObservable() }
     
     // 認証ユーザー取得
-    func fetchUserProfile(accessToken: String) -> Observable<AuthenticatedUser> {
+    func fetchUserProfile() -> Observable<AuthenticatedUser>? {
+        guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else { return nil }
+        
         return api.call(AuthenticatedUserProfileRequest(accessToken: accessToken))
             .do {
                 self.isLoadingRelay.accept(true)
@@ -29,7 +29,9 @@ class UserProfileViewModel {
     }
     
     // フォローしているタグ取得
-    func fetchUserFolloingTags(userId: String) -> Observable<[ItemTag]> {
+    func fetchUserFolloingTags() -> Observable<[ItemTag]>? {
+        guard let userId = UserDefaults.standard.string(forKey: "userId") else { return nil }
+        
         return api.call(UserFollowingTagsRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
@@ -39,7 +41,9 @@ class UserProfileViewModel {
     }
     
     // ストック記事取得
-    func fetchUserStockItems(userId: String) -> Observable<[Item]> {
+    func fetchUserStockItems() -> Observable<[Item]>? {
+        guard let userId = UserDefaults.standard.string(forKey: "userId") else { return nil }
+        
         return api.call(UserStocksRequest(userId: userId))
             .do {
                 self.isLoadingRelay.accept(true)
