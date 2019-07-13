@@ -18,8 +18,6 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     
     let viewModel = QiitaLoginViewModel()
     let disposeBag = DisposeBag()
-    var accesToken: String = ""
-    var authCode: String = ""
     
 // - LifeCycle
     
@@ -38,7 +36,6 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
 
 extension QiitaLoginViewController {
     private func setupDataBinding() {
-    
     }
 }
 
@@ -48,20 +45,12 @@ extension QiitaLoginViewController {
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         if let url = webView.url?.absoluteString {
             guard let code = getParameter(url: url, param: "code") else { return }
-            self.authCode = code
-            print("get code")
-            
             // アクセストークン取得
-            viewModel.getAccessToken(authCode: authCode)
+            viewModel.getAccessToken(authCode: code)
                 .subscribe(onNext: { token in
-                    self.accesToken = token.token
-                    print("get accesstoken")
+                    self.performSegue(withIdentifier: Resourses.string.toUserProfile, sender: (token.token))
                 })
                 .disposed(by: disposeBag)
-            
-            performSegue(withIdentifier: Resourses.string.toUserProfile, sender: (accesToken))
-        } else {
-            
         }
     }
 }
