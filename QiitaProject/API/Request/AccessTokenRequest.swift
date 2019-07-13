@@ -21,7 +21,7 @@ struct AccessTokenRequest: RequestProtocol {
     }
     
     var path: String {
-        return "/access_token"
+        return "/access_tokens"
     }
     
     var parameters: Parameters? {

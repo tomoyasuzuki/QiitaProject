@@ -19,6 +19,7 @@ class QiitaLoginViewModel {
             .asObservable()
             .map { data in try! JSONDecoder().decode(Token.self, from: data) }
             .do(onNext: { token in
+                print("find token: \(token.token)")
                 UserDefaults.standard.setValue(token.token, forKey: "accessToken")
             }
         )
