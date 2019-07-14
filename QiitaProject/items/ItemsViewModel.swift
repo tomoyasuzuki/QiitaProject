@@ -51,6 +51,7 @@ class ItemsViewModel {
             .do { self.isLoadingRelay.accept(true) }
             .flatMap({ (boolen, string) -> Observable<[Item]> in
                 //TODO: isLastCellObservable が　false の時は APIを叩かないようにする
+                print(boolen)
                 return self.api.call(ItemsRequest(query: string, page: self.page, perPage: 10))
                     .asObservable()
                     .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}

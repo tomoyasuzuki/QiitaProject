@@ -21,8 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     private let viewModel = ItemsViewModel()
     private let disposeBag = DisposeBag()
     fileprivate let refresh = UIRefreshControl()
-    
-    private let defaultNumberOfRows = 10
+
     private var isLastCell: Bool = false
     
     private var enableFetchMoreItems: Bool = false
