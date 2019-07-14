@@ -13,7 +13,7 @@ import Nuke
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    // - property
+    // - Property
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -40,6 +40,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupDataBinding()
     }
     
+    // - Override
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Resourses.string.toItemDetail {
+            let vc = segue.destination as! ItemDetailViewController
+            (vc.titleString, vc.urlString) = sender as! (String, String)
+        }
+    }
+    
     // - Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,12 +72,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let title = item.title, let url = item.url else { return }
-        // 画面遷移
+        
         performSegue(withIdentifier: Resourses.string.toItemDetail, sender: (title, url))
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // 最下部のセルを検知
         let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
         if indexPath.row == lastCellRow {
             self.isLastCell = true
@@ -77,7 +85,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    // - function
+    // - DataBinding
     
     private func setupDataBinding() {
         
@@ -104,19 +112,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // more items
         
-        viewModel.fetchMoreItems(isLastCell: Observable.of(self.isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
+        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(self.isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
             .subscribe(onNext: { _ in
                 self.tableView.reloadData()
                 print("more items")
             })
             .disposed(by: disposeBag)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Resourses.string.toItemDetail {
-            let vc = segue.destination as! ItemDetailViewController
-            (vc.titleString, vc.urlString) = sender as! (String, String)
-        }
     }
 }
 
