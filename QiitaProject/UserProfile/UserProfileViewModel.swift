@@ -25,7 +25,7 @@ class UserProfileViewModel {
                 self.isLoadingRelay.accept(true)
             }
             .asObservable()
-            .map { data in try! JSONDecoder().decode(AuthenticatedUser.self, from: data)}
+            .map { response in try! JSONDecoder().decode(AuthenticatedUser.self, from: response.data!)}
     }
     
     // フォローしているタグ取得
@@ -37,7 +37,7 @@ class UserProfileViewModel {
                 self.isLoadingRelay.accept(true)
             }
             .asObservable()
-            .map { data in try! JSONDecoder().decode([ItemTag].self, from: data) }
+            .map { response in try! JSONDecoder().decode([ItemTag].self, from: response.data!) }
     }
     
     // ストック記事取得
@@ -49,6 +49,6 @@ class UserProfileViewModel {
                 self.isLoadingRelay.accept(true)
             }
             .asObservable()
-            .map { data in try! JSONDecoder().decode([Item].self, from: data) }
+            .map { response in try! JSONDecoder().decode([Item].self, from: response.data!) }
     }
 }

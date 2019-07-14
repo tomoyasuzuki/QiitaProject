@@ -25,6 +25,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     private let defaultNumberOfRows = 10
     private var isLastCell: Bool = false
     
+    private var enableFetchMoreItems: Bool = false
+    
     // - LifeCycle
     
     override func viewDidLoad() {
@@ -32,9 +34,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        tableView.refreshControl = refresh
-        refresh.addTarget(self, action: #selector(refreshTableView(_ :)), for: .valueChanged)
         
         tableView.register(itemTableViewCell.self, forCellReuseIdentifier: Resourses.string.itemTableViewCell)
         
@@ -60,12 +59,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // タップされたセルを特定
         let item = viewModel.items[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let title = item.title, let url = item.url else { return }
-
         // 画面遷移
         performSegue(withIdentifier: Resourses.string.toItemDetail, sender: (title, url))
     }
@@ -83,25 +80,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // - function
     
     private func setupDataBinding() {
+        
+        // fetch items
+        
         viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
             .subscribe(onNext: { _ in
                 self.tableView.reloadData()
+                print("fetch items")
             })
             .disposed(by: disposeBag)
+        
+        // loading
         
         viewModel.isLoadingObservable
             .subscribe(onNext: { isLoading in
                 if isLoading {
-                    // Progress表示
+                   print("loading")
                 } else {
-                    // Progress非表示
+                   print("loading")
                 }
             })
             .disposed(by: disposeBag)
         
-        viewModel.fetchMoreItems(isLastCell: Observable.of(self.isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())?
-            .subscribe(onNext: { items in
+        // more items
+        
+        viewModel.fetchMoreItems(isLastCell: Observable.of(self.isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
+            .subscribe(onNext: { _ in
                 self.tableView.reloadData()
+                print("more items")
             })
             .disposed(by: disposeBag)
     }
@@ -111,12 +117,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let vc = segue.destination as! ItemDetailViewController
             (vc.titleString, vc.urlString) = sender as! (String, String)
         }
-    }
-    
-    @objc func refreshTableView(_ sender: AnyObject) {
-        // APIを叩く
-        // itemsのcountが増える
-        // reloadtableした時にセルが増える
     }
 }
 

@@ -11,6 +11,8 @@ struct ItemsRequest: RequestProtocol {
     
     init(query: String, page: Int, perPage: Int){
         self.query = query
+        self.page = page
+        self.perPage = perPage
     }
     
     var query: String = ""

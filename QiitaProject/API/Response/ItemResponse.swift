@@ -7,7 +7,8 @@
 //
 import Alamofire
 
-struct ItemResponse {
-    let items: [Item]
+struct ItemResponse: ResponseProtocol {
+    typealias Element = Item
+    let responseItems: [Item]
     let httpHeaders: HTTPHeaders
 }

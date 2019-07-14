@@ -14,6 +14,9 @@
 		571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */; };
 		571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */; };
 		571CD39322D9D8F0007E3DF9 /* ItemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571CD39222D9D8F0007E3DF9 /* ItemResponse.swift */; };
+		571CD39722D9DAF5007E3DF9 /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571CD39622D9DAF5007E3DF9 /* APIConstant.swift */; };
+		571CD39922D9DB36007E3DF9 /* ItemsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571CD39822D9DB36007E3DF9 /* ItemsApi.swift */; };
+		571CD39B22D9E124007E3DF9 /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571CD39A22D9E124007E3DF9 /* ResponseProtocol.swift */; };
 		57313CE922C9BE62004DC569 /* extentionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57313CE822C9BE62004DC569 /* extentionUIColor.swift */; };
 		5731462122C8AA50000E642B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731462022C8AA50000E642B /* AppDelegate.swift */; };
 		5731462322C8AA50000E642B /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731462222C8AA50000E642B /* ItemsViewController.swift */; };
@@ -56,6 +59,9 @@
 		571C18D322CBA1DD00B73FB7 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
 		571C18DF22CC1C5700B73FB7 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		571CD39222D9D8F0007E3DF9 /* ItemResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemResponse.swift; sourceTree = "<group>"; };
+		571CD39622D9DAF5007E3DF9 /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
+		571CD39822D9DB36007E3DF9 /* ItemsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsApi.swift; sourceTree = "<group>"; };
+		571CD39A22D9E124007E3DF9 /* ResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseProtocol.swift; sourceTree = "<group>"; };
 		57313CE822C9BE62004DC569 /* extentionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionUIColor.swift; sourceTree = "<group>"; };
 		5731461D22C8AA50000E642B /* QiitaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiitaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5731462022C8AA50000E642B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 		571CD39122D9D8C4007E3DF9 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				571CD39A22D9E124007E3DF9 /* ResponseProtocol.swift */,
 				571CD39222D9D8F0007E3DF9 /* ItemResponse.swift */,
 			);
 			path = Response;
@@ -200,6 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				5731463422C8AB7F000E642B /* APIClient.swift */,
+				571CD39622D9DAF5007E3DF9 /* APIConstant.swift */,
+				571CD39822D9DB36007E3DF9 /* ItemsApi.swift */,
 				571CD39022D9D8A2007E3DF9 /* Request */,
 				571CD39122D9D8C4007E3DF9 /* Response */,
 			);
@@ -388,6 +397,7 @@
 			files = (
 				573E433622D4A1ED005CA9A8 /* TOPViewController.swift in Sources */,
 				578049A822D37412001F76C5 /* AccessTokenRequest.swift in Sources */,
+				571CD39922D9DB36007E3DF9 /* ItemsApi.swift in Sources */,
 				5731F98222CC40ED00BC9F6D /* itemTableViewCell.swift in Sources */,
 				5780499E22D2BB01001F76C5 /* OauthLoginRequest.swift in Sources */,
 				5731F98922D0172E00BC9F6D /* TokenModel.swift in Sources */,
@@ -406,6 +416,7 @@
 				571C18D422CBA1DD00B73FB7 /* ItemsViewModel.swift in Sources */,
 				5780499422D20CF1001F76C5 /* SpecifiedUserModel.swift in Sources */,
 				578049A222D372D0001F76C5 /* UserStocksRequest.swift in Sources */,
+				571CD39722D9DAF5007E3DF9 /* APIConstant.swift in Sources */,
 				5731464B22C900DA000E642B /* extentionDate.swift in Sources */,
 				5780499A22D2B4F3001F76C5 /* ItemsRequest.swift in Sources */,
 				5731463722C8B271000E642B /* GroupModel.swift in Sources */,
@@ -418,6 +429,7 @@
 				578049A622D37330001F76C5 /* UserFollowersRequest.swift in Sources */,
 				5731462122C8AA50000E642B /* AppDelegate.swift in Sources */,
 				571C18E022CC1C5700B73FB7 /* ItemDetailViewController.swift in Sources */,
+				571CD39B22D9E124007E3DF9 /* ResponseProtocol.swift in Sources */,
 				578049A022D3724E001F76C5 /* UserFollowingTagsRequest.swift in Sources */,
 				57154B9822CAC5F600EF7FCF /* UserItemModel.swift in Sources */,
 				5731463522C8AB7F000E642B /* APIClient.swift in Sources */,

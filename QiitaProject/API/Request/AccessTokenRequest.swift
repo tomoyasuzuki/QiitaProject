@@ -25,7 +25,7 @@ struct AccessTokenRequest: RequestProtocol {
     }
     
     var parameters: Parameters? {
-        return ["client_id": API.clientId, "client_secret": API.clientSecret, "code": code]
+        return ["client_id": APIConstant.clientId, "client_secret": APIConstant.clientSecret, "code": code]
     }
 }
 

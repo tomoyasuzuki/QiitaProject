@@ -66,7 +66,7 @@ extension QiitaLoginViewController {
     private func navigateToOauth() {
         let request = OauthLoginRequest()
         let url = URL(string: request.baseURL + request.path)
-        let urlRequest = URLRequest(url: (url?.queryItemAdded([URLQueryItem(name: Resourses.string.clientId, value: API.clientId), URLQueryItem(name: Resourses.string.clientSecret, value: API.clientSecret)]))!)
+        let urlRequest = URLRequest(url: (url?.queryItemAdded([URLQueryItem(name: Resourses.string.clientId, value: APIConstant.clientId), URLQueryItem(name: Resourses.string.clientSecret, value: APIConstant.clientSecret)]))!)
         webView.load(urlRequest)
     }
     
