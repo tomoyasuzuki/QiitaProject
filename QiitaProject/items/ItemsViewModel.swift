@@ -20,12 +20,13 @@ class ItemsViewModel {
     var items: [Item] = []
     var enableFetchMoreItems: Bool = true
     var page: Int = 1
+    var perPage: Int = 10
     
     let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var isLoadingObservable: Observable<Bool> { return isLoadingRelay.asObservable() }
     
-    let fetchItemRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
-    var fetchItemObservable: Observable<[Item]> { return fetchItemRelay.asObservable() }
+    let fetchItemsRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
+    var fetchItemsObservable: Observable<[Item]> { return fetchItemsRelay.asObservable() }
     
     let fetchMoreItemRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
     var fetchMoreItemObservable: Observable<[Item]> { return fetchMoreItemRelay.asObservable() }
@@ -42,7 +43,7 @@ class ItemsViewModel {
             .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
             .do(onNext: { items in
                 self.items = items
-                self.fetchItemRelay.accept(self.items)
+                self.fetchItemsRelay.accept(self.items)
             })
             .map { _ in ()}
     }
@@ -67,19 +68,18 @@ class ItemsViewModel {
 // change variable state
 
 extension ItemsViewModel {
-    private func changeEnableFetchItemsState(enableFetchMoreItems: Bool) {
-        self.enableFetchMoreItems = enableFetchMoreItems
-    }
-    
     private func countUpPage(response: DataResponse<Data>) {
-        if let header = response.response?.allHeaderFields["Link"] as? String {
-            if header.contains("rel=\"next\"") {
+        if let totalCount = response.response?.allHeaderFields["total-count"] as? Int {
+            if totalCount == self.items.count {
+                self.enableFetchMoreItems = false
+            } else {
+                if (totalCount - self.items.count) < self.perPage {
+                   self.perPage = totalCount - self.items.count
+                }
+                
                 print("incriment page:\(page) -> \(page + 1)")
                 self.page += 1
-                
-                changeEnableFetchItemsState(enableFetchMoreItems: true)
-            } else {
-                changeEnableFetchItemsState(enableFetchMoreItems: false)
+                self.enableFetchMoreItems = true
             }
         }
     }

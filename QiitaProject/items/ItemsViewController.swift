@@ -96,6 +96,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         viewModel.fetchItems(observable: serarchBarObservable)
             .subscribe(onNext: { _ in
+                // What to do
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.fetchItemsObservable
+            .subscribe(onNext: { _ in
                 self.tableView.reloadData()
                 print("fetch items")
             })
@@ -117,8 +123,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         viewModel.fetchMoreItems(isLastCellObservable: Observable.of(self.isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
             .subscribe(onNext: { _ in
+                // What to do
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.fetchMoreItemObservable
+            .subscribe(onNext: { _ in
                 self.tableView.reloadData()
-                print("more items")
+                print("fetch more items")
             })
             .disposed(by: disposeBag)
     }

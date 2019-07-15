@@ -46,16 +46,20 @@ extension QiitaLoginViewController {
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         if let url = webView.url?.absoluteString {
             guard let code = getParameter(url: url, param: "code") else { return }
+            UserDefaults.standard.set(code, forKey: "authCode")
             
             // アクセストークン取得
-            viewModel.getAccessToken()?
+            viewModel.getAccessToken()
+                .subscribe(onNext: { _ in
+                    // What to do
+                })
+                .disposed(by: disposeBag)
+            
+            viewModel.accessTokenObservable
                 .subscribe(onNext: { token in
                     self.performSegue(withIdentifier: Resourses.string.toUserProfile, sender: nil)
                 })
                 .disposed(by: disposeBag)
-
-            
-            UserDefaults.standard.set(code, forKey: "authCode")
         }
     }
 }
