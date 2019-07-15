@@ -14,7 +14,7 @@ struct AccessTokenRequest: RequestProtocol {
         self.code = code
     }
     
-    var code: String = ""
+    var code: String?
     
     var method: HTTPMethod {
         return .post
@@ -25,7 +25,7 @@ struct AccessTokenRequest: RequestProtocol {
     }
     
     var parameters: Parameters? {
-        return ["client_id": APIConstant.clientId, "client_secret": APIConstant.clientSecret, "code": code]
+        return ["client_id": APIConstant.clientId, "client_secret": APIConstant.clientSecret, "code": code!]
     }
 }
 
