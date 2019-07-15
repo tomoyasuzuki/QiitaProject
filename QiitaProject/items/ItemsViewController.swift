@@ -20,11 +20,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private let viewModel = ItemsViewModel()
     private let disposeBag = DisposeBag()
-    fileprivate let refresh = UIRefreshControl()
+    
+    internal var serarchBarObservable: Observable<String> {
+        return searchBar.rx.text.orEmpty
+            .asObservable()
+            .debounce(0.5, scheduler: MainScheduler.instance)
+            .filter { $0.count >= 2 }
+    }
 
     private var isLastCell: Bool = false
-    
-    private var enableFetchMoreItems: Bool = false
     
     // - LifeCycle
     
@@ -90,7 +94,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // fetch items
         
-        viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
+        viewModel.fetchItems(observable: serarchBarObservable)
             .subscribe(onNext: { _ in
                 self.tableView.reloadData()
                 print("fetch items")

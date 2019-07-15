@@ -24,40 +24,43 @@ class ItemsViewModel {
     let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var isLoadingObservable: Observable<Bool> { return isLoadingRelay.asObservable() }
     
+    let fetchItemRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
+    var fetchItemObservable: Observable<[Item]> { return fetchItemRelay.asObservable() }
+    
+    let fetchMoreItemRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
+    var fetchMoreItemObservable: Observable<[Item]> { return fetchMoreItemRelay.asObservable() }
+    
     // - Main Method
     
-    func fetchItems(observable: Observable<String>) -> Observable<[Item]> {
+    func fetchItems(observable: Observable<String>) -> Observable<Void> {
         return observable
-            .debounce(0.5, scheduler: MainScheduler.instance)
-            .filter { $0.count >= 2 }
             .do { self.isLoadingRelay.accept(true) }
             .flatMap { self.api.call(ItemsRequest(query: $0,page: self.page, perPage: 10)) }
-            .asObservable()
             .do (onNext: { response in
                 self.countUpPage(response: response)
             })
-            .map { response in return try! JSONDecoder().decode([Item].self, from: response.data!)}
+            .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
             .do(onNext: { items in
                 self.items = items
-            }
-        )
+                self.fetchItemRelay.accept(self.items)
+            })
+            .map { _ in ()}
     }
     
-    func fetchMoreItems(isLastCellObservable: Observable<Bool>, observable: Observable<String>) -> Observable<[Item]> {
+    func fetchMoreItems(isLastCellObservable: Observable<Bool>, observable: Observable<String>) -> Observable<Void> {
         return Observable
             .combineLatest(isLastCellObservable, observable)
-            .debounce(0.5, scheduler: MainScheduler.instance)
-            .filter { (boolen, string) in string.count >= 2 }
             .do { self.isLoadingRelay.accept(true) }
-            .flatMap({ (boolen, string) -> Observable<[Item]> in
-                //TODO: isLastCellObservable が　false の時は APIを叩かないようにする
-                print(boolen)
+            .flatMap({ (boolen, string) in
+                //TODO: boolen が　false の時は APIを叩かないようにする
                 return self.api.call(ItemsRequest(query: string, page: self.page, perPage: 10))
-                    .asObservable()
-                    .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
-                }
-            )
-            .do(onNext: { items in self.items = items } )
+            })
+            .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
+            .do(onNext: {
+                items in self.items = items
+                self.fetchMoreItemRelay.accept(self.items)
+            })
+            .map { _ in ()}
     }
 }
 
