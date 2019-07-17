@@ -16,20 +16,17 @@ class ItemsViewModel {
     
     // - Property
     
-    let api = API()
+    private let api = API()
     var items: [Item] = []
-    var enableFetchMoreItems: Bool = true
-    var page: Int = 1
-    var perPage: Int = 10
+    private var enableFetchMoreItems: Bool = true
+    private var page: Int = 1
+    private var perPage: Int = 10
     
-    let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
-    var isLoadingObservable: Observable<Bool> { return isLoadingRelay.asObservable() }
+    private let isLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
+    var isLoadingObservable: Driver<Bool> { return isLoadingRelay.asDriver(onErrorDriveWith: Driver.empty()) }
     
-    let fetchItemsRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
-    var fetchItemsObservable: Observable<[Item]> { return fetchItemsRelay.asObservable() }
-    
-    let fetchMoreItemRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
-    var fetchMoreItemObservable: Observable<[Item]> { return fetchMoreItemRelay.asObservable() }
+    private let itemsRelay: PublishRelay<[Item]> = PublishRelay<[Item]>()
+    var itemsObservable: Driver<[Item]> { return itemsRelay.asDriver(onErrorDriveWith: Driver.empty()) }
     
     // - Main Method
     
@@ -43,7 +40,7 @@ class ItemsViewModel {
             .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
             .do(onNext: { items in
                 self.items = items
-                self.fetchItemsRelay.accept(self.items)
+                self.itemsRelay.accept(self.items)
             })
             .map { _ in ()}
     }
@@ -59,7 +56,7 @@ class ItemsViewModel {
             .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
             .do(onNext: {
                 items in self.items = items
-                self.fetchMoreItemRelay.accept(self.items)
+                self.itemsRelay.accept(self.items)
             })
             .map { _ in ()}
     }

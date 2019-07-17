@@ -6,17 +6,16 @@
 //  Copyright © 2019 tomoya.suzuki. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import Nuke
+import RxCocoa
+import RxSwift
+import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
     // - Property
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
     
     private let viewModel = ItemsViewModel()
     private let disposeBag = DisposeBag()
@@ -27,7 +26,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             .debounce(0.5, scheduler: MainScheduler.instance)
             .filter { $0.count >= 2 }
     }
-
+    
     private var isLastCell: Bool = false
     
     // - LifeCycle
@@ -82,17 +81,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
         if indexPath.row == lastCellRow {
-            self.isLastCell = true
+            isLastCell = true
         } else {
-            self.isLastCell = false
+            isLastCell = false
         }
     }
     
     // - DataBinding
     
     private func setupDataBinding() {
+        // items
+        viewModel.itemsObservable
+            .drive(onNext: { _ in self.tableView.reloadData() })
+            .disposed(by: disposeBag)
         
-        // fetch items
+        // fetch
         
         viewModel.fetchItems(observable: serarchBarObservable)
             .subscribe(onNext: { _ in
@@ -100,39 +103,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             })
             .disposed(by: disposeBag)
         
-        viewModel.fetchItemsObservable
-            .subscribe(onNext: { _ in
-                self.tableView.reloadData()
-                print("fetch items")
-            })
-            .disposed(by: disposeBag)
-        
         // loading
         
         viewModel.isLoadingObservable
-            .subscribe(onNext: { isLoading in
-                if isLoading {
-                   print("loading")
-                } else {
-                   print("loading")
-                }
+            .drive(onNext: { isLoading in
+                if isLoading {} else {}
             })
             .disposed(by: disposeBag)
         
-        // more items
+        // refetch
         
-        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(self.isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
+        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
             .subscribe(onNext: { _ in
                 // What to do
             })
             .disposed(by: disposeBag)
-        
-        viewModel.fetchMoreItemObservable
-            .subscribe(onNext: { _ in
-                self.tableView.reloadData()
-                print("fetch more items")
-            })
-            .disposed(by: disposeBag)
     }
 }
-
