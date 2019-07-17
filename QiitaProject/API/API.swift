@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  API.swift
 //  QiitaProject
 //
 //  Created by 鈴木友也 on 2019/06/30.
@@ -13,7 +13,11 @@ class API {
     func call<T: RequestProtocol>(_ request: T) -> Single<DataResponse<Data>> {
         return Single.create { (observer) -> Disposable in
             let disposeBag = Disposables.create()
-            let url = URL(string: "\(request.baseURL)" + "\(request.path)")!
+            guard let url = URL(string: "\(request.baseURL)\(request.path)") else {
+                observer(.error(APIError.invalidUrl))
+                return disposeBag
+            }
+            
             Alamofire.request(url, method: request.method, parameters: request.parameters)
                 .validate()
                 .responseData { response in
@@ -22,7 +26,7 @@ class API {
                         observer(.success(response))
                     case .failure(let error):
                         observer(.error(error))
-                        print("eorrordebug: \(error.localizedDescription)")
+                        print("eorrorDebug: \(error.localizedDescription)")
                 }
             }
             return disposeBag
