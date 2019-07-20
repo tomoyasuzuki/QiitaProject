@@ -18,7 +18,7 @@ class UserProfileViewController: UIViewController {
     private let viewModel = UserProfileViewModel()
     private let disposeBag = DisposeBag()
     
-    private let backgroundViewSize: CGSize = CGSize(width: 60.0, height: 60.0)
+    private let backgroundViewSize: CGSize = CGSize(width: 75.0, height: 75.0)
     
     var itemsCount: Int = 0
     
@@ -97,7 +97,7 @@ class UserProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        navigationItem.title = "プロフィール"
+        navigationItem.title = Resourses.string.userProfileNavigationBarTitle
         
         view.addSubview(userProfileImageView)
         view.addSubview(userNameLabel)
@@ -169,6 +169,8 @@ class UserProfileViewController: UIViewController {
         
         userNameLabel.textColor = UIColor.gray
         userNameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        userNameLabel.numberOfLines = 2
+        userNameLabel.lineBreakMode = .byCharWrapping
         
         userContentsArea.axis = .horizontal
         userContentsArea.alignment = .fill
@@ -180,45 +182,45 @@ class UserProfileViewController: UIViewController {
         followeeCountLabel.textAlignment = .center
         followeeCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         followeeTitleLabel.textAlignment = .center
-        followeeTitleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        followeeTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
         followerBackgroundView.backgroundColor = Resourses.color.qiitaColor
         followerBackgroundView.layer.cornerRadius = 4.0
         followerCountLabel.textAlignment = .center
         followerCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         followerTitleLabel.textAlignment = .center
-        followerTitleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        followerTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
         stockItemsBackgroundView.backgroundColor = Resourses.color.qiitaColor
         stockItemsBackgroundView.layer.cornerRadius = 4.0
         stockItemsCountLabel.textAlignment = .center
         stockItemsCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         stockItemsTitleLabel.textAlignment = .center
-        stockItemsTitleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        stockItemsTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
         myTagsBackgroundView.backgroundColor = Resourses.color.qiitaColor
         myTagsBackgroundView.layer.cornerRadius = 4.0
         tagsCountLabel.textAlignment = .center
         tagsCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         tagsTitleLabel.textAlignment = .center
-        tagsTitleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        tagsTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
         tableViewHeaderView.backgroundColor = Resourses.color.qiitaColor
     }
     
     func setupDefaultValues() {
-        userNameLabel.text = "ログインすると名前が表示されます"
+        userNameLabel.text = Resourses.string.userNameDefault
         followeeCountLabel.text = "0"
-        followerTitleLabel.text = "フォロー"
+        followeeTitleLabel.text = Resourses.string.unitFolloweeCount
         
         followerCountLabel.text = "0"
-        followerTitleLabel.text = "フォロワー"
+        followerTitleLabel.text = Resourses.string.unitFollowerCount
         
         stockItemsCountLabel.text = "0"
-        stockItemsTitleLabel.text = "件"
+        stockItemsTitleLabel.text = Resourses.string.unitItemCount
         
         tagsCountLabel.text = "0"
-        tagsTitleLabel.text = "件"
+        tagsTitleLabel.text = Resourses.string.unitItemCount
     }
     
     
@@ -233,6 +235,7 @@ class UserProfileViewController: UIViewController {
         userNameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(userProfileImageView)
             make.left.equalTo(userProfileImageView.snp.right).offset(16)
+            make.right.lessThanOrEqualTo(view).offset(-32)
         }
         
         border.snp.makeConstraints { make in
@@ -247,6 +250,8 @@ class UserProfileViewController: UIViewController {
             make.right.equalTo(view).offset(-32)
             make.left.equalTo(view).offset(32)
         }
+        
+        // backgroundview
         
         followeeBackgroundView.snp.makeConstraints { make in
             make.size.equalTo(backgroundViewSize)
@@ -264,17 +269,19 @@ class UserProfileViewController: UIViewController {
             make.size.equalTo(backgroundViewSize)
         }
         
+        // labels
+        
         followeeCountLabel.snp.makeConstraints { make in
             make.center.equalTo(followeeBackgroundView)
         }
         
-        followerTitleLabel.snp.makeConstraints { make in
+        followeeTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(followeeCountLabel.snp.bottom).offset(4)
             make.centerX.equalTo(followeeCountLabel)
         }
         
         followerCountLabel.snp.makeConstraints { make in
-            make.center.equalTo(followeeBackgroundView)
+            make.center.equalTo(followerBackgroundView)
         }
         
         followerTitleLabel.snp.makeConstraints { make in
