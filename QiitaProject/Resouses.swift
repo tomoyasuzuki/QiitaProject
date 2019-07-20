@@ -18,6 +18,7 @@ struct Resourses {
         // button
         static let backButtonTitle = "戻る"
         static let loginButtonTitle = "ログイン"
+        static let historyButtonTitle = "閲覧履歴"
         // segue
         static let toWebView = "toWebView"
         static let toUserProfile = "toUserProfile"
@@ -33,6 +34,8 @@ struct Resourses {
         // Profile
         static let userProfileNavigationBarTitle = "Qiitaプロフィール"
         static let userNameDefault = "ログインするとユーザー名が表示されます"
+        // History
+        static let historyNavigationBarTitle = "閲覧履歴"
         // Unit
         static let unitFolloweeCount = "フォロー"
         static let unitFollowerCount = "フォロワー"

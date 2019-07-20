@@ -25,11 +25,11 @@ class SideMenuViewController: UIViewController {
         UIView()
     }()
 
-    private lazy var howToUseImageButton: UIButton = {
+    private lazy var historyImageButton: UIButton = {
         UIButton()
     }()
     
-    private lazy var howToUseImageButtonBorderButtom: UIView = {
+    private lazy var historyImageButtonBorderButtom: UIView = {
         UIView()
     }()
     
@@ -55,8 +55,8 @@ class SideMenuViewController: UIViewController {
         
         view.addSubview(loginImageButton)
         view.addSubview(loginImageButtonBorderButtom)
-        view.addSubview(howToUseImageButton)
-        view.addSubview(howToUseImageButtonBorderButtom)
+        view.addSubview(historyImageButton )
+        view.addSubview(historyImageButtonBorderButtom)
         view.addSubview(inquiryImageButton)
         view.addSubview(inquiryImageButtonBorderButtom)
         view.addSubview(appInfoImageButton)
@@ -73,6 +73,12 @@ extension SideMenuViewController {
         loginImageButton.setTitleColor(UIColor.gray, for: .normal)
         
         loginImageButtonBorderButtom.backgroundColor = UIColor.gray
+        
+        historyImageButton.addTarget(self, action: #selector(navigateToHistoryViewController(_ :)), for: .touchUpInside)
+        historyImageButton.setTitle(Resourses.string.historyButtonTitle, for: .normal)
+        historyImageButton.setTitleColor(UIColor.gray, for: .normal)
+        
+        historyImageButtonBorderButtom.backgroundColor = UIColor.gray
     }
 }
 
@@ -93,6 +99,19 @@ extension SideMenuViewController {
             make.right.equalTo(view).offset(-16)
             make.left.equalTo(view).offset(16)
         }
+        
+        historyImageButton.snp.makeConstraints { make in
+            make.height.equalTo(buttonHeight)
+            make.top.equalTo(loginImageButtonBorderButtom.snp.bottom).offset(32)
+            make.left.equalTo(view).offset(32)
+        }
+        
+        historyImageButtonBorderButtom.snp.makeConstraints { make in
+            make.height.equalTo(1.0)
+            make.top.equalTo(historyImageButton.snp.bottom).offset(16)
+            make.right.equalTo(view).offset(-16)
+            make.left.equalTo(view).offset(16)
+        }
     }
 }
 
@@ -101,5 +120,9 @@ extension SideMenuViewController {
 extension SideMenuViewController {
     @objc func navigateToLoginViewController(_ sender: AnyObject) {
         navigationController?.pushViewController(UserProfileViewController(), animated: true)
+    }
+    
+    @objc func navigateToHistoryViewController(_ sender: AnyObject) {
+        navigationController?.pushViewController(HistoryViewController(), animated: true)
     }
 }
