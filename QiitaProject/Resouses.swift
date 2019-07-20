@@ -29,11 +29,20 @@ struct Resourses {
         static let backBarButtonTitle = "戻る"
         static let tagTitle = "タグ"
         static let tagEmptyDescription = "タグがありません"
-        // subTitle
+        static let searchNavigationBarTitle = "Qiita記事を検索"
+        // Profile
+        static let userProfileNavigationBarTitle = "Qiitaプロフィール"
+        static let userNameDefault = "ログインするとユーザー名が表示されます"
+        // Unit
+        static let unitFolloweeCount = "フォロー"
+        static let unitFollowerCount = "フォロワー"
+        static let unitPersonCount = "人"
+        static let unitItemCount = "件"
     }
     
     internal struct image {
-        static let gear: UIImage = UIImage(named: "gear")!
+        static let gear = UIImage(named: "gear")
+        static let menuButton = UIImage(named: "MenuButton")
     }
     
     internal struct color {

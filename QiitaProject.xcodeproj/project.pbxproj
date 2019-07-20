@@ -175,14 +175,15 @@
 				5731464E22C907E0000E642B /* Model */,
 				573E433222D4A199005CA9A8 /* Top */,
 				5731F98522CC46DF00BC9F6D /* Login */,
-				5780498E22D1CD4F001F76C5 /* UserProfile */,
+				5780498E22D1CD4F001F76C5 /* Profile */,
 				5731F98422CC46C700BC9F6D /* Search */,
 				57C6770C22E33C1E00D1DE3B /* SideMenu */,
 				5731465222C90F1E000E642B /* Extention */,
 				5731462422C8AA50000E642B /* Main.storyboard */,
+				5731462922C8AA56000E642B /* LaunchScreen.storyboard */,
+				573E433722D59821005CA9A8 /* Resouses.swift */,
 				5731462022C8AA50000E642B /* AppDelegate.swift */,
 				5731462722C8AA56000E642B /* Assets.xcassets */,
-				5731462922C8AA56000E642B /* LaunchScreen.storyboard */,
 				5731462C22C8AA56000E642B /* Info.plist */,
 				5731F97E22CC1FFD00BC9F6D /* GoogleService-Info.plist */,
 			);
@@ -224,7 +225,6 @@
 				5731464A22C900DA000E642B /* extentionDate.swift */,
 				57313CE822C9BE62004DC569 /* extentionUIColor.swift */,
 				5780498C22D1A6DA001F76C5 /* extentionURL.swift */,
-				573E433722D59821005CA9A8 /* Resouses.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -257,13 +257,13 @@
 			path = Top;
 			sourceTree = "<group>";
 		};
-		5780498E22D1CD4F001F76C5 /* UserProfile */ = {
+		5780498E22D1CD4F001F76C5 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				5780498F22D1CD71001F76C5 /* UserProfileViewController.swift */,
 				5780499122D1CD7F001F76C5 /* UserProfileViewModel.swift */,
 			);
-			path = UserProfile;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		57C6770C22E33C1E00D1DE3B /* SideMenu */ = {

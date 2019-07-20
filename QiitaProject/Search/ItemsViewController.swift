@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // - View
     
     private lazy var menuButton: UIBarButtonItem = {
-        UIBarButtonItem(image: UIImage(named: "MenuButton"), style: .plain, target: self, action: #selector(openSideMenu(_:)))
+        UIBarButtonItem(image: Resourses.image.menuButton, style: .plain, target: self, action: #selector(openSideMenu(_:)))
     }()
     
     // - LifeCycle
@@ -46,6 +46,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         menuButton.tintColor = UIColor.black
         navigationItem.leftBarButtonItem = menuButton
+        
+        navigationItem.title = Resourses.string.searchNavigationBarTitle
         
         tableView.delegate = self
         tableView.dataSource = self
