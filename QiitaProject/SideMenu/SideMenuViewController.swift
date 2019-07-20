@@ -100,6 +100,6 @@ extension SideMenuViewController {
 
 extension SideMenuViewController {
     @objc func navigateToLoginViewController(_ sender: AnyObject) {
-        present(UserProfileViewController(), animated: true, completion: nil)
+        navigationController?.pushViewController(UserProfileViewController(), animated: true)
     }
 }

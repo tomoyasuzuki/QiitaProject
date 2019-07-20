@@ -15,9 +15,8 @@ import SideMenu
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // - Property
-    
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     private let viewModel = ItemsViewModel()
     private let disposeBag = DisposeBag()

@@ -77,8 +77,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="BkZ-1D-1TF"/>
                     <connections>
-                        <outlet property="searchBar" destination="WSt-vT-nsy" id="2gd-bD-BQ3"/>
-                        <outlet property="tableView" destination="k9g-hN-5PJ" id="kyK-jI-zub"/>
+                        <outlet property="searchBar" destination="WSt-vT-nsy" id="LNi-w0-t9F"/>
+                        <outlet property="tableView" destination="k9g-hN-5PJ" id="9K4-ym-s4I"/>
                         <segue destination="zMk-Bp-i41" kind="show" identifier="toItemDetail" id="r8J-F8-dsL"/>
                     </connections>
                 </viewController>

@@ -15,44 +15,117 @@ class UserProfileViewController: UIViewController {
     
    // - Property
     
-    @IBOutlet weak var userProfileImageView: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var border: UIView!
-    @IBOutlet weak var followeeBackgroundView: UIView!
-    @IBOutlet weak var followerBackgroundView: UIView!
-    @IBOutlet weak var stockItemsBackgroundView: UIView!
-    @IBOutlet weak var myTagsBackgroundView: UIView!
-    @IBOutlet weak var followeeCountLabel: UILabel!
-    @IBOutlet weak var followeeTitleLabel: UILabel!
-    @IBOutlet weak var followerCountLabel: UILabel!
-    @IBOutlet weak var followerTitleLabel: UILabel!
-    @IBOutlet weak var stockItemsCountLabel: UILabel!
-    @IBOutlet weak var stockItemsTitleLabel: UILabel!
-    @IBOutlet weak var tagsCountLabel: UILabel!
-    @IBOutlet weak var tagsTitleLabel: UILabel!
-    @IBOutlet weak var tableViewHeaderView: UIView!
-    
     private let viewModel = UserProfileViewModel()
     private let disposeBag = DisposeBag()
-
+    
     private let backgroundViewSize: CGSize = CGSize(width: 60.0, height: 60.0)
     
     var itemsCount: Int = 0
     
-    private lazy var menuButton: UIBarButtonItem = {
-        UIBarButtonItem()
+    // - View
+    
+    private lazy var userProfileImageView: UIImageView = {
+        UIImageView()
+    }()
+    private lazy var userNameLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var border: UIView = {
+        UIView()
+    }()
+    
+    
+    private lazy var userContentsArea: UIStackView = {
+        UIStackView()
+    }()
+    
+    private lazy var followeeBackgroundView: UIView = {
+        UIView()
+    }()
+    
+    private lazy var followerBackgroundView: UIView = {
+        UIView()
+    }()
+    
+    private lazy var stockItemsBackgroundView: UIView = {
+        UIView()
+    }()
+    
+    private lazy var myTagsBackgroundView: UIView = {
+        UIView()
+    }()
+    
+    private lazy var followeeCountLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var followeeTitleLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var followerCountLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var followerTitleLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var stockItemsCountLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var stockItemsTitleLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var tagsCountLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var tagsTitleLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var tableViewHeaderView: UIView = {
+        UIView()
     }()
     
     // - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        navigationItem.title = "プロフィール"
         
-        navigationItem.leftBarButtonItem = menuButton
+        view.addSubview(userProfileImageView)
+        view.addSubview(userNameLabel)
+        view.addSubview(border)
+        view.addSubview(userContentsArea)
+        view.addSubview(tableViewHeaderView)
+        
+        userContentsArea.addArrangedSubview(followeeBackgroundView)
+        userContentsArea.addArrangedSubview(followerBackgroundView)
+        userContentsArea.addArrangedSubview(stockItemsBackgroundView)
+        userContentsArea.addArrangedSubview(myTagsBackgroundView)
+        
+        followeeBackgroundView.addSubview(followeeTitleLabel)
+        followeeBackgroundView.addSubview(followeeCountLabel)
+        
+        followerBackgroundView.addSubview(followerCountLabel)
+        followerBackgroundView.addSubview(followerTitleLabel)
+        
+        stockItemsBackgroundView.addSubview(stockItemsCountLabel)
+        stockItemsBackgroundView.addSubview(stockItemsTitleLabel)
+        
+        myTagsBackgroundView.addSubview(tagsCountLabel)
+        myTagsBackgroundView.addSubview(tagsTitleLabel)
 
         setupDataBinding()
         setupLayout()
         setupDefaultValues()
+        setupConstraints()
     }
     
     // - DataBinding
@@ -92,6 +165,13 @@ class UserProfileViewController: UIViewController {
         userProfileImageView.layer.cornerRadius = 4.0
         userProfileImageView.alpha = 0.5
         
+        userNameLabel.textColor = UIColor.white
+        
+        userContentsArea.axis = .horizontal
+        userContentsArea.alignment = .fill
+        userContentsArea.distribution = .fillEqually
+        userContentsArea.spacing = 16
+        
         followeeBackgroundView.backgroundColor = Resourses.color.qiitaColor
         followeeBackgroundView.layer.cornerRadius = 4.0
         followeeCountLabel.textAlignment = .center
@@ -119,9 +199,16 @@ class UserProfileViewController: UIViewController {
         userProfileImageView.backgroundColor = UIColor.gray
         userNameLabel.text = "ログインすると名前が表示されます"
         followeeCountLabel.text = "0"
+        followerTitleLabel.text = "フォロー"
+        
         followerCountLabel.text = "0"
+        followerTitleLabel.text = "フォロワー"
+        
         stockItemsCountLabel.text = "0"
+        stockItemsTitleLabel.text = "件"
+        
         tagsCountLabel.text = "0"
+        tagsTitleLabel.text = "件"
     }
     
     
@@ -141,6 +228,71 @@ class UserProfileViewController: UIViewController {
         border.snp.makeConstraints { make in
             make.height.equalTo(1.0)
             make.top.equalTo(userProfileImageView.snp.bottom).offset(16)
+            make.right.left.equalTo(view)
+        }
+        
+        userContentsArea.snp.makeConstraints { make in
+            make.height.equalTo(followeeBackgroundView)
+            make.top.equalTo(border.snp.bottom).offset(16)
+            make.right.equalTo(view).offset(-16)
+            make.left.equalTo(view).offset(16)
+        }
+        
+        followeeBackgroundView.snp.makeConstraints { make in
+            make.size.equalTo(backgroundViewSize)
+        }
+        
+        followerBackgroundView.snp.makeConstraints { make in
+            make.size.equalTo(backgroundViewSize)
+        }
+        
+        stockItemsBackgroundView.snp.makeConstraints { make in
+            make.size.equalTo(backgroundViewSize)
+        }
+        
+        myTagsBackgroundView.snp.makeConstraints { make in
+            make.size.equalTo(backgroundViewSize)
+        }
+        
+        followeeCountLabel.snp.makeConstraints { make in
+            make.center.equalTo(followeeBackgroundView)
+        }
+        
+        followerTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(followeeCountLabel.snp.bottom).offset(4)
+            make.centerX.equalTo(followeeCountLabel)
+        }
+        
+        followerCountLabel.snp.makeConstraints { make in
+            make.center.equalTo(followeeBackgroundView)
+        }
+        
+        followerTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(followerCountLabel.snp.bottom).offset(4)
+            make.centerX.equalTo(followerCountLabel)
+        }
+        
+        stockItemsCountLabel.snp.makeConstraints { make in
+            make.center.equalTo(stockItemsBackgroundView)
+        }
+        
+        stockItemsTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(stockItemsCountLabel.snp.bottom).offset(4)
+            make.centerX.equalTo(stockItemsCountLabel)
+        }
+        
+        tagsCountLabel.snp.makeConstraints { make in
+            make.center.equalTo(myTagsBackgroundView)
+        }
+        
+        tagsTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(tagsCountLabel.snp.bottom).offset(4)
+            make.centerX.equalTo(tagsCountLabel)
+        }
+        
+        tableViewHeaderView.snp.makeConstraints { make in
+            make.height.equalTo(30)
+            make.top.equalTo(userContentsArea.snp.bottom).offset(16)
             make.right.left.equalTo(view)
         }
     }
