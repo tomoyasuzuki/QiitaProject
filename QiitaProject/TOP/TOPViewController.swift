@@ -8,8 +8,7 @@
 
 import UIKit
 
-class TOPViewController: ViewController {
-    @IBOutlet weak var loginButton: UIButton!
+class TopViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

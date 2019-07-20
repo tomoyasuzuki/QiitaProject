@@ -12,6 +12,7 @@ pod 'RxCocoa','~> 4.2'
 pod 'Firebase/Core'
 pod 'Nuke'
 pod 'SnapKit','~> 4.2'
+pod 'SideMenu'
 
  
 

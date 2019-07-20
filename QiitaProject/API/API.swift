@@ -26,7 +26,6 @@ class API {
                         observer(.success(response))
                     case .failure(let error):
                         observer(.error(error))
-                        print("eorrorDebug: \(error.localizedDescription)")
                 }
             }
             return disposeBag

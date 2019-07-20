@@ -17,6 +17,7 @@ struct Resourses {
         
         // button
         static let backButtonTitle = "戻る"
+        static let loginButtonTitle = "ログイン"
         // segue
         static let toWebView = "toWebView"
         static let toUserProfile = "toUserProfile"
@@ -33,5 +34,9 @@ struct Resourses {
     
     internal struct image {
         static let gear: UIImage = UIImage(named: "gear")!
+    }
+    
+    internal struct color {
+        static let qiitaColor = UIColor.hex(string: "00FF00", alpha: 0.50)
     }
 }

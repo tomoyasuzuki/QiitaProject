@@ -29,6 +29,7 @@ class ItemDetailViewController: UIViewController, WKNavigationDelegate {
         
         navigationItem.title = titleString
         navigationItem.backBarButtonItem?.title = Resourses.string.backButtonTitle
+        navigationItem.backBarButtonItem?.tintColor = UIColor.black
         
         webView.navigationDelegate = self
         
