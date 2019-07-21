@@ -53,7 +53,7 @@ class ItemsViewModel {
             })
             .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
             .do(onNext: { items in
-                self.addItem(items: items)
+                self.addMoreItem(items: items)
                 self.itemsRelay.accept(self.items)
             })
             .map { _ in ()}
@@ -81,7 +81,7 @@ extension ItemsViewModel {
 }
 
 extension ItemsViewModel {
-    private func addItem(items: [Item]) {
+    private func addMoreItem(items: [Item]) {
         for i in 0...items.count - 1 {
             self.items.insert(items[i], at: 0)
         }
