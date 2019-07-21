@@ -21,13 +21,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     private let viewModel = ItemsViewModel()
     private let disposeBag = DisposeBag()
     
-    internal var serarchBarObservable: Observable<String> {
-        return searchBar.rx.text.orEmpty
-            .asObservable()
-            .debounce(0.5, scheduler: MainScheduler.instance)
-            .filter { $0.count >= 2 }
-    }
-    
     var sideMenuNavigationController: UISideMenuNavigationController = UISideMenuNavigationController(rootViewController: SideMenuViewController())
     
     private var isLastCell: Bool = false
@@ -95,7 +88,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastCellRow = tableView.numberOfRows(inSection: 0) - 5
+        let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
         if indexPath.row == lastCellRow {
             isLastCell = true
         } else {
@@ -113,7 +106,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // fetch
         
-        viewModel.fetchItems(observable: serarchBarObservable)
+        viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
             .subscribe(onNext: { _ in
                 // What to do
                 
@@ -130,7 +123,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // refetch
         
-        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(isLastCell), observable: serarchBarObservable)
+        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
             .subscribe(onNext: { _ in
                 // What to do
             })
