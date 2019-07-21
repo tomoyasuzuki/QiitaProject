@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import Firebase
 
 class ItemDetailViewController: UIViewController, WKNavigationDelegate {
     
@@ -34,6 +35,7 @@ class ItemDetailViewController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         
         navigateToItemPage(urlString: urlString)
+        storeItemURL()
     }
 }
 
@@ -53,5 +55,11 @@ private extension ItemDetailViewController {
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         decisionHandler(.allow)
+    }
+}
+
+extension ItemDetailViewController {
+    private func storeItemURL() {
+        // FirebaseのdatabaseにURLを保存する
     }
 }

@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class HistoryViewController: UIViewController {
+    
+    private var viewModel = HisotryViewModel()
+    private let disposeBag = DisposeBag()
     
     private lazy var tableView: UITableView = {
         UITableView()
@@ -18,7 +23,6 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = Resourses.string.historyNavigationBarTitle
-        navigationItem.backBarButtonItem?.title = ""
         view.backgroundColor = UIColor.white
         
         view.addSubview(tableView)
@@ -26,13 +30,24 @@ class HistoryViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(itemTableViewCell.self, forCellReuseIdentifier: "HisotoryCell")
 
         // TODO: 閲覧した（詳細まで遷移した）記事をリアルタイムに反映させる。
         // HOW: データベースに記事を保存しておいてtableViewと結びつける
         // DO: itemDetailViewModelでアイテムをデータベースに保存する→HistoryViewModelでそれを取得してtableViewに表示する
         
         setupConstraints()
+    }
+}
+
+extension HistoryViewController {
+    func setupDataBindimg() {
+        
+        viewModel.historyDriver
+            .drive(onNext: { _ in
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -49,11 +64,12 @@ extension HistoryViewController {
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.viewModel.history.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HisotoryCell", for: indexPath) as! itemTableViewCell
+        cell.bind(items: viewModel.history, indexPath: indexPath)
         return cell
     }
 
