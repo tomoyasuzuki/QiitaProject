@@ -95,7 +95,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
+        let lastCellRow = tableView.numberOfRows(inSection: 0) - 5
         if indexPath.row == lastCellRow {
             isLastCell = true
         } else {
@@ -116,6 +116,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewModel.fetchItems(observable: serarchBarObservable)
             .subscribe(onNext: { _ in
                 // What to do
+                
             })
             .disposed(by: disposeBag)
         
@@ -129,7 +130,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // refetch
         
-        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
+        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(isLastCell), observable: serarchBarObservable)
             .subscribe(onNext: { _ in
                 // What to do
             })
