@@ -44,19 +44,12 @@ class ItemsViewModel {
             .map { _ in ()}
     }
     
-    func fetchMoreItems(isLastCellObservable: Observable<Bool>, observable: Observable<String>) -> Observable<Void> {
-        return Observable
-            .combineLatest(isLastCellObservable, observable)
+    func fetchMoreItems(isLastCell: Bool, observable: Observable<String>) -> Observable<Void> {
+        return observable
             .debounce(0.5, scheduler: MainScheduler.instance)
-            .filter({ (isLastCell,query) -> Bool in
-                isLastCell == true && query.count >= 2
-            })
-            .flatMap({ (isLastCell, query) in
-                return self.api.call(ItemsRequest(query: query, page: self.page, perPage: self.perPage))
-            })
-            .do(onNext: { response in
-                self.countUpPage(response: response)
-            })
+            .filter { query -> Bool in isLastCell == true && query.count >= 2 }
+            .flatMap { query in return self.api.call(ItemsRequest(query: query, page: self.page, perPage: self.perPage)) }
+            .do(onNext: { response in self.countUpPage(response: response) })
             .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
             .do(onNext: { items in
                 self.addMoreItem(items: items)
@@ -70,19 +63,18 @@ class ItemsViewModel {
 
 extension ItemsViewModel {
     private func countUpPage(response: DataResponse<Data>) {
-        guard let _totalCount = response.response?.allHeaderFields["total-count"], let totalCount = _totalCount as? String else { return }
-        let totalCountInt = Int(totalCount)!
-        if totalCountInt <= self.items.count {
-            self.enableFetchMoreItems = false
-        } else {
-            if (totalCountInt - self.items.count) < self.perPage {
-                self.perPage = totalCountInt - self.items.count
-            }
-            
-            print("incriment page:\(page) -> \(page + 1)")
-            self.page += 1
-            self.enableFetchMoreItems = true
+        guard let _totalCount = response.response?.allHeaderFields[Resourses.string.responseHeaderTotalCount],
+            let totalCountString = _totalCount as? String else { return }
+        
+        let totalCount = Int(totalCountString)!
+        
+        if (totalCount - self.items.count) < self.perPage {
+            self.perPage = totalCount - self.items.count
         }
+        
+        print("incriment page:\(page) -> \(page + 1)")
+        self.page += 1
+        self.enableFetchMoreItems = true
     }
 }
 

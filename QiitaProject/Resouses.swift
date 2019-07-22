@@ -15,10 +15,11 @@ struct Resourses {
         static let clientId = "client_id"
         static let clientSecret = "client_secret"
         
-        // button
+        // Search
         static let backButtonTitle = "戻る"
         static let loginButtonTitle = "ログイン"
         static let historyButtonTitle = "閲覧履歴"
+        static let responseHeaderTotalCount = "total-count"
         // segue
         static let toWebView = "toWebView"
         static let toUserProfile = "toUserProfile"
