@@ -4,8 +4,8 @@ Qiita Project
 ## Description
 This repository is an example to study RxSwift and MVVM architecture.
 This repository is WIP.</br>
-I want Additional feature. 
-・ Login</br>
+I want Additional feature. </br>
+・ Login </br>
 ・ History </br>
 ・ Profile </br>
 (2019/07/24)
