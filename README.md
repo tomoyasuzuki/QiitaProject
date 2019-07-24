@@ -14,7 +14,7 @@ RxCocoa
 Alamofire
 Nuke
 
-## Archtecture
+## Architecture
 MVVM
 
 If you have more good solution or comment, please help me! 
