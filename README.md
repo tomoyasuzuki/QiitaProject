@@ -1,6 +1,7 @@
 Qiita Project
 ====
-<img width="348" alt="スクリーンショット 2019-07-24 12 17 28" src="https://user-images.githubusercontent.com/43513915/61762470-0ac4fa80-ae0d-11e9-89e7-c02b417f3678.png">
+<img width="351" alt="スクリーンショット 2019-07-24 12 20 34" src="https://user-images.githubusercontent.com/43513915/61762601-832bbb80-ae0d-11e9-90c0-cc2d17033672.png">
+
 
 ## Description
 This repository is an example to study RxSwift and MVVM architecture.
