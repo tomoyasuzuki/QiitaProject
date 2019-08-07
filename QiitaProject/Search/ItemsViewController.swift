@@ -18,13 +18,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    private let viewModel = ItemsViewModel()
+    private lazy var viewModel = ItemsViewModel(searchBarObservable: searchBar.rx.text.orEmpty.asObservable())
     private let disposeBag = DisposeBag()
     
     var sideMenuNavigationController: UISideMenuNavigationController = UISideMenuNavigationController(rootViewController: SideMenuViewController())
     
-    private var isLastCell: Bool = false
     private let menuWidth: CGFloat = 200.0
+    
+    private var isLastCellRelay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
+    var isLastCellObservable: Observable<Bool> { return isLastCellRelay.asObservable() }
     
     // - View
     
@@ -90,42 +92,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastCellRow = tableView.numberOfRows(inSection: 0) - 1
         if indexPath.row == lastCellRow {
-            isLastCell = true
-        } else {
-            isLastCell = false
+            //TODO: LastCellをViewModelに通知する
         }
     }
     
     // - DataBinding
     
     private func setupDataBinding() {
-        // items
+        
         viewModel.itemsObservable
             .drive(onNext: { _ in self.tableView.reloadData() })
             .disposed(by: disposeBag)
         
-        // fetch
-        
-        viewModel.fetchItems(observable: searchBar.rx.text.orEmpty.asObservable())
+        viewModel.fetchItems()
             .subscribe(onNext: { _ in
-                // What to do
-                
+                print("text")
             })
             .disposed(by: disposeBag)
-        
-        // loading
         
         viewModel.isLoadingObservable
             .drive(onNext: { isLoading in
                 if isLoading {} else {}
-            })
-            .disposed(by: disposeBag)
-        
-        // refetch
-        
-        viewModel.fetchMoreItems(isLastCellObservable: Observable.of(isLastCell), observable: searchBar.rx.text.orEmpty.asObservable())
-            .subscribe(onNext: { _ in
-                // What to do
             })
             .disposed(by: disposeBag)
     }

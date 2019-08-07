@@ -18,6 +18,6 @@ class HisotryViewModel {
     
     func getHistory() {
         // Firebaseのデータベースを参照する
-        // 通知を出す
+        
     }
 }

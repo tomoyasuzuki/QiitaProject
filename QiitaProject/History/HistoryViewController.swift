@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Firebase
 
 class HistoryViewController: UIViewController {
     
@@ -43,11 +44,7 @@ class HistoryViewController: UIViewController {
 extension HistoryViewController {
     func setupDataBindimg() {
         
-        viewModel.historyDriver
-            .drive(onNext: { _ in
-                self.tableView.reloadData()
-            })
-            .disposed(by: disposeBag)
+        viewModel.getHistory()
     }
 }
 

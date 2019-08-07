@@ -13,6 +13,7 @@ pod 'Firebase/Core'
 pod 'Nuke'
 pod 'SnapKit','~> 4.2'
 pod 'SideMenu'
+pod 'SVProgressHUD'
 
  
 
