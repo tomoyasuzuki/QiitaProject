@@ -18,6 +18,7 @@ struct Resourses {
         // Search
         static let backButtonTitle = "戻る"
         static let loginButtonTitle = "ログイン"
+        static let userProfileButtonTitle = "マイページ"
         static let historyButtonTitle = "閲覧履歴"
         static let responseHeaderTotalCount = "total-count"
         // segue

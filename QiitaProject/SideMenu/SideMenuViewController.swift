@@ -10,18 +10,26 @@ import UIKit
 
 class SideMenuViewController: UIViewController {
     
-    // - Property
+    // MARK: Property
     
     private let buttonHeight: CGFloat = 30.0
     private let iconImageViewHeight: CGFloat = 36.0
     
-    // - View
+    // MARK: View
     
     private lazy var loginImageButton: UIButton = {
         UIButton()
     }()
     
     private lazy var loginImageButtonBorderButtom: UIView = {
+        UIView()
+    }()
+    
+    private lazy var userProfileImageButton: UIButton = {
+        UIButton()
+    }()
+    
+    private lazy var userProfileImageButtonBorderButtom: UIView = {
         UIView()
     }()
 
@@ -45,7 +53,7 @@ class SideMenuViewController: UIViewController {
         UIButton()
     }()
     
-    // - Life Cycle
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +63,8 @@ class SideMenuViewController: UIViewController {
         
         view.addSubview(loginImageButton)
         view.addSubview(loginImageButtonBorderButtom)
+        view.addSubview(userProfileImageButton)
+        view.addSubview(userProfileImageButtonBorderButtom)
         view.addSubview(historyImageButton )
         view.addSubview(historyImageButtonBorderButtom)
         view.addSubview(inquiryImageButton)
@@ -71,18 +81,21 @@ extension SideMenuViewController {
         loginImageButton.addTarget(self, action: #selector(navigateToLoginViewController(_ :)), for: .touchUpInside)
         loginImageButton.setTitle(Resourses.string.loginButtonTitle, for: .normal)
         loginImageButton.setTitleColor(UIColor.gray, for: .normal)
+        loginImageButtonBorderButtom.backgroundColor = UIColor.gray
         
+        userProfileImageButton.addTarget(self, action: #selector(navigateToUserProfileViewController(_:)), for: .touchUpInside)
+        userProfileImageButton.setTitle(Resourses.string.userProfileButtonTitle, for: .normal)
+        userProfileImageButton.setTitleColor(UIColor.gray, for: .normal)
         loginImageButtonBorderButtom.backgroundColor = UIColor.gray
         
         historyImageButton.addTarget(self, action: #selector(navigateToHistoryViewController(_ :)), for: .touchUpInside)
         historyImageButton.setTitle(Resourses.string.historyButtonTitle, for: .normal)
         historyImageButton.setTitleColor(UIColor.gray, for: .normal)
-        
         historyImageButtonBorderButtom.backgroundColor = UIColor.gray
     }
 }
 
-// - Constraints
+// MARK: Constraints
 
 extension SideMenuViewController {
     func setupConstraints() {
@@ -100,9 +113,22 @@ extension SideMenuViewController {
             make.left.equalTo(view).offset(16)
         }
         
-        historyImageButton.snp.makeConstraints { make in
+        userProfileImageButton.snp.makeConstraints { make in
             make.height.equalTo(buttonHeight)
             make.top.equalTo(loginImageButtonBorderButtom.snp.bottom).offset(32)
+            make.left.equalTo(view).offset(32)
+        }
+        
+        userProfileImageButtonBorderButtom.snp.makeConstraints { make in
+            make.height.equalTo(1.0)
+            make.top.equalTo(historyImageButton.snp.bottom).offset(16)
+            make.right.equalTo(view).offset(-16)
+            make.left.equalTo(view).offset(16)
+        }
+        
+        historyImageButton.snp.makeConstraints { make in
+            make.height.equalTo(buttonHeight)
+            make.top.equalTo(userProfileImageButtonBorderButtom.snp.bottom).offset(16)
             make.left.equalTo(view).offset(32)
         }
         
@@ -115,7 +141,7 @@ extension SideMenuViewController {
     }
 }
 
-// Navigator
+// MARK: Navigator
 
 extension SideMenuViewController {
     @objc func navigateToLoginViewController(_ sender: AnyObject) {
@@ -124,5 +150,9 @@ extension SideMenuViewController {
     
     @objc func navigateToHistoryViewController(_ sender: AnyObject) {
         navigationController?.pushViewController(HistoryViewController(), animated: true)
+    }
+    
+    @objc func navigateToUserProfileViewController(_ sender: AnyObject) {
+        navigationController?.pushViewController(UserProfileViewController(), animated: true)
     }
 }
