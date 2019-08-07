@@ -192,7 +192,7 @@
 				5731465122C9080D000E642B /* API */,
 				5731464E22C907E0000E642B /* Model */,
 				5731F98522CC46DF00BC9F6D /* Login */,
-				5780498E22D1CD4F001F76C5 /* Profile */,
+				5780498E22D1CD4F001F76C5 /* MyPage */,
 				5731F98422CC46C700BC9F6D /* Search */,
 				57C6770C22E33C1E00D1DE3B /* SideMenu */,
 				57C6770D22E35B1C00D1DE3B /* History */,
@@ -267,13 +267,13 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		5780498E22D1CD4F001F76C5 /* Profile */ = {
+		5780498E22D1CD4F001F76C5 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
 				5780498F22D1CD71001F76C5 /* UserProfileViewController.swift */,
 				5780499122D1CD7F001F76C5 /* UserProfileViewModel.swift */,
 			);
-			path = Profile;
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		57C6770C22E33C1E00D1DE3B /* SideMenu */ = {

@@ -12,7 +12,9 @@ import Alamofire
 import RxSwift
 
 class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
-    @IBOutlet var webView: WKWebView!
+    private lazy var webView: WKWebView = {
+        WKWebView()
+    }()
     
 // - Property
     
@@ -23,8 +25,11 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.navigationDelegate = self
+        view = webView
         
         navigateToOauth()
         
@@ -37,6 +42,14 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
 extension QiitaLoginViewController {
     private func setupDataBinding() {
 
+    }
+}
+
+extension QiitaLoginViewController {
+    private func setupConstraints() {
+        webView.snp.makeConstraints { make in
+            make.edges.equalTo(view)
+        }
     }
 }
 

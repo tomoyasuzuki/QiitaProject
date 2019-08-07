@@ -24,6 +24,18 @@ class UserProfileViewController: UIViewController {
     
     // - View
     
+    private lazy var loginPromptView: UIView = {
+        UIView()
+    }()
+    
+    private lazy var loginPromptViewLabel: UILabel = {
+        UILabel()
+    }()
+    
+    private lazy var loginPromptViewButton: UIButton = {
+        UIButton()
+    }()
+    
     private lazy var userProfileImageView: UIImageView = {
         UIImageView()
     }()
@@ -105,6 +117,10 @@ class UserProfileViewController: UIViewController {
         view.addSubview(userContentsArea)
         view.addSubview(tableViewHeaderView)
         
+        view.addSubview(loginPromptView)
+        loginPromptView.addSubview(loginPromptViewLabel)
+        loginPromptView.addSubview(loginPromptViewButton)
+        
         userContentsArea.addArrangedSubview(followeeBackgroundView)
         userContentsArea.addArrangedSubview(followerBackgroundView)
         userContentsArea.addArrangedSubview(stockItemsBackgroundView)
@@ -126,6 +142,12 @@ class UserProfileViewController: UIViewController {
         setupLayout()
         setupDefaultValues()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        checkUserStatus()
     }
     
     // - DataBinding
@@ -163,6 +185,22 @@ class UserProfileViewController: UIViewController {
     func setupLayout() {
         view.backgroundColor = UIColor.white
         
+        loginPromptView.backgroundColor = UIColor.white
+        loginPromptView.layer.cornerRadius = 4.0
+        loginPromptView.layer.borderColor = UIColor.black.cgColor
+        loginPromptView.layer.borderWidth = 2.0
+        
+        loginPromptViewLabel.text = "ログインすることでQiitaのプロフィールをアプリから閲覧することができます。"
+        loginPromptViewLabel.numberOfLines = 0
+        loginPromptViewLabel.lineBreakMode = .byCharWrapping
+        
+        loginPromptViewButton.setTitle("ログイン", for: .normal)
+        loginPromptViewButton.layer.cornerRadius = 4.0
+        loginPromptViewButton.backgroundColor = Resourses.color.qiitaColor
+        loginPromptViewButton.setTitleColor(UIColor.white, for: .normal)
+        loginPromptViewButton.contentEdgeInsets = UIEdgeInsets(top: 4.0, left: 16.0, bottom: 4.0, right: 16.0)
+        loginPromptViewButton.addTarget(self, action: #selector(navigateToLogin(_:)), for: .touchUpInside)
+        
         userProfileImageView.layer.cornerRadius = 4.0
         userProfileImageView.alpha = 0.5
         userProfileImageView.backgroundColor = UIColor.gray
@@ -177,38 +215,40 @@ class UserProfileViewController: UIViewController {
         userContentsArea.distribution = .fillEqually
         userContentsArea.spacing = 16
         
-        followeeBackgroundView.backgroundColor = Resourses.color.qiitaColor
+        followeeBackgroundView.backgroundColor = UIColor.gray
         followeeBackgroundView.layer.cornerRadius = 4.0
         followeeCountLabel.textAlignment = .center
         followeeCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         followeeTitleLabel.textAlignment = .center
         followeeTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
-        followerBackgroundView.backgroundColor = Resourses.color.qiitaColor
+        followerBackgroundView.backgroundColor = UIColor.gray
         followerBackgroundView.layer.cornerRadius = 4.0
         followerCountLabel.textAlignment = .center
         followerCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         followerTitleLabel.textAlignment = .center
         followerTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
-        stockItemsBackgroundView.backgroundColor = Resourses.color.qiitaColor
+        stockItemsBackgroundView.backgroundColor = UIColor.gray
         stockItemsBackgroundView.layer.cornerRadius = 4.0
         stockItemsCountLabel.textAlignment = .center
         stockItemsCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         stockItemsTitleLabel.textAlignment = .center
         stockItemsTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
-        myTagsBackgroundView.backgroundColor = Resourses.color.qiitaColor
+        myTagsBackgroundView.backgroundColor = UIColor.gray
         myTagsBackgroundView.layer.cornerRadius = 4.0
         tagsCountLabel.textAlignment = .center
         tagsCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         tagsTitleLabel.textAlignment = .center
         tagsTitleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
-        tableViewHeaderView.backgroundColor = Resourses.color.qiitaColor
+        tableViewHeaderView.backgroundColor = UIColor.gray
     }
     
     func setupDefaultValues() {
+        loginPromptView.isHidden = true
+        
         userNameLabel.text = Resourses.string.userNameDefault
         followeeCountLabel.text = "0"
         followeeTitleLabel.text = Resourses.string.unitFolloweeCount
@@ -226,6 +266,23 @@ class UserProfileViewController: UIViewController {
     
     // - Constraints
     func setupConstraints() {
+        loginPromptView.snp.makeConstraints { make in
+            make.width.height.equalTo(200)
+            make.center.equalTo(view)
+        }
+        
+        loginPromptViewLabel.snp.makeConstraints { make in
+            make.top.equalTo(loginPromptView.snp.top).offset(32)
+            make.right.equalTo(loginPromptView).offset(-16)
+            make.left.equalTo(loginPromptView).offset(16)
+            make.centerX.equalTo(loginPromptView)
+        }
+        
+        loginPromptViewButton.snp.makeConstraints { make in
+            make.bottom.equalTo(loginPromptView.snp.bottom).offset(-20)
+            make.centerX.equalTo(loginPromptView)
+        }
+        
         userProfileImageView.snp.makeConstraints { make in
             make.top.equalTo(view).offset(80)
             make.left.equalTo(view).offset(32)
@@ -312,6 +369,23 @@ class UserProfileViewController: UIViewController {
             make.top.equalTo(userContentsArea.snp.bottom).offset(16)
             make.right.left.equalTo(view)
         }
+    }
+}
+
+
+extension UserProfileViewController {
+    func checkUserStatus() {
+        if UserDefaults.standard.bool(forKey: "userStatus") {
+            loginPromptView.isHidden = true
+        } else {
+           loginPromptView.isHidden = false
+        }
+    }
+}
+
+extension UserProfileViewController {
+    @objc func navigateToLogin(_ sender: AnyObject) {
+        navigationController?.pushViewController(QiitaLoginViewController(), animated: true)
     }
 }
 
