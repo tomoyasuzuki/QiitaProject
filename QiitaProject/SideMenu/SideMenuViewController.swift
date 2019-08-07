@@ -17,14 +17,6 @@ class SideMenuViewController: UIViewController {
     
     // MARK: View
     
-    private lazy var loginImageButton: UIButton = {
-        UIButton()
-    }()
-    
-    private lazy var loginImageButtonBorderButtom: UIView = {
-        UIView()
-    }()
-    
     private lazy var userProfileImageButton: UIButton = {
         UIButton()
     }()
@@ -61,8 +53,6 @@ class SideMenuViewController: UIViewController {
         view.backgroundColor = UIColor.white
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        view.addSubview(loginImageButton)
-        view.addSubview(loginImageButtonBorderButtom)
         view.addSubview(userProfileImageButton)
         view.addSubview(userProfileImageButtonBorderButtom)
         view.addSubview(historyImageButton )
@@ -78,15 +68,10 @@ class SideMenuViewController: UIViewController {
 
 extension SideMenuViewController {
     func setupLayout() {
-        loginImageButton.addTarget(self, action: #selector(navigateToLoginViewController(_ :)), for: .touchUpInside)
-        loginImageButton.setTitle(Resourses.string.loginButtonTitle, for: .normal)
-        loginImageButton.setTitleColor(UIColor.gray, for: .normal)
-        loginImageButtonBorderButtom.backgroundColor = UIColor.gray
-        
         userProfileImageButton.addTarget(self, action: #selector(navigateToUserProfileViewController(_:)), for: .touchUpInside)
         userProfileImageButton.setTitle(Resourses.string.userProfileButtonTitle, for: .normal)
         userProfileImageButton.setTitleColor(UIColor.gray, for: .normal)
-        loginImageButtonBorderButtom.backgroundColor = UIColor.gray
+        userProfileImageButtonBorderButtom.backgroundColor = UIColor.gray
         
         historyImageButton.addTarget(self, action: #selector(navigateToHistoryViewController(_ :)), for: .touchUpInside)
         historyImageButton.setTitle(Resourses.string.historyButtonTitle, for: .normal)
@@ -100,28 +85,15 @@ extension SideMenuViewController {
 extension SideMenuViewController {
     func setupConstraints() {
         
-        loginImageButton.snp.makeConstraints { make in
+        userProfileImageButton.snp.makeConstraints { make in
             make.height.equalTo(buttonHeight)
             make.top.equalTo(view).offset(48)
             make.left.equalTo(view).offset(32)
         }
         
-        loginImageButtonBorderButtom.snp.makeConstraints { make in
-            make.height.equalTo(1.0)
-            make.top.equalTo(loginImageButton.snp.bottom).offset(16)
-            make.right.equalTo(view).offset(-16)
-            make.left.equalTo(view).offset(16)
-        }
-        
-        userProfileImageButton.snp.makeConstraints { make in
-            make.height.equalTo(buttonHeight)
-            make.top.equalTo(loginImageButtonBorderButtom.snp.bottom).offset(32)
-            make.left.equalTo(view).offset(32)
-        }
-        
         userProfileImageButtonBorderButtom.snp.makeConstraints { make in
             make.height.equalTo(1.0)
-            make.top.equalTo(historyImageButton.snp.bottom).offset(16)
+            make.top.equalTo(userProfileImageButton.snp.bottom).offset(16)
             make.right.equalTo(view).offset(-16)
             make.left.equalTo(view).offset(16)
         }
@@ -143,11 +115,7 @@ extension SideMenuViewController {
 
 // MARK: Navigator
 
-extension SideMenuViewController {
-    @objc func navigateToLoginViewController(_ sender: AnyObject) {
-        navigationController?.pushViewController(UserProfileViewController(), animated: true)
-    }
-    
+extension SideMenuViewController { 
     @objc func navigateToHistoryViewController(_ sender: AnyObject) {
         navigationController?.pushViewController(HistoryViewController(), animated: true)
     }
