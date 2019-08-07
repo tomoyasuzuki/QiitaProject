@@ -19,9 +19,6 @@ class QiitaLoginViewModel {
     func getAccessToken() -> Observable<Void> {
         return api.call(AccessTokenRequest(code: UserDefaults.standard.string(forKey: "authCode")!))
             .asObservable()
-            .do(onNext: { response in
-                print(response.request)
-            })
             .map { response in try! JSONDecoder().decode(Token.self, from: response.data!) }
             .do(onNext: { token in
                 self.acceessTokenRelay.accept(token.token)

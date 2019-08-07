@@ -197,8 +197,8 @@ class UserProfileViewController: UIViewController {
         loginPromptViewButton.setTitle("ログイン", for: .normal)
         loginPromptViewButton.layer.cornerRadius = 4.0
         loginPromptViewButton.backgroundColor = Resourses.color.qiitaColor
-        loginPromptViewButton.setTitleColor(UIColor.white, for: .normal)
-        loginPromptViewButton.contentEdgeInsets = UIEdgeInsets(top: 4.0, left: 16.0, bottom: 4.0, right: 16.0)
+        loginPromptViewButton.setTitleColor(UIColor.gray, for: .normal)
+        loginPromptViewButton.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 32.0, bottom: 8.0, right: 32.0)
         loginPromptViewButton.addTarget(self, action: #selector(navigateToLogin(_:)), for: .touchUpInside)
         
         userProfileImageView.layer.cornerRadius = 4.0
