@@ -34,7 +34,11 @@ class QiitaLoginViewModel {
     }
     
     func input(authCode: PublishRelay<String>) -> Output {
-        zs
+        let transition = authCode
+                        .asSignal() // 本当はここでAPIを叩く?
+                        .map { _ in ()}
+        
+        return Output(transition: transition)
     }
 }
 

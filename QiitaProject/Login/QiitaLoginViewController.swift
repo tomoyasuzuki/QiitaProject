@@ -52,9 +52,9 @@ extension QiitaLoginViewController {
         
         viewModel.input(authCode: relay)
             .transition
-            .asObservable() // 後でviewmodel側でやる様に変更する
+            .asObservable()
             .subscribe(onNext: { _ in
-                // 画面遷移
+                self.navigateToUserProfile()
             })
             .disposed(by: disposeBag)
     }
@@ -92,5 +92,11 @@ extension QiitaLoginViewController {
         guard let url = URLComponents(string: url) else { return nil }
         // パラメータのnameがparamに初めて一致した時のvalueを取り出している
         return url.queryItems?.first(where: { $0.name == param })!.value! ?? ""
+    }
+}
+
+extension QiitaLoginViewController {
+    private func navigateToUserProfile() {
+        navigationController?.pushViewController(UserProfileViewController(), animated: true)
     }
 }
