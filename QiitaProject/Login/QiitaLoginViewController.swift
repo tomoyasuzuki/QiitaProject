@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import Alamofire
 import RxSwift
+import RxCocoa
 
 class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     private lazy var webView: WKWebView = {
@@ -21,6 +22,8 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     let viewModel = QiitaLoginViewModel()
     let disposeBag = DisposeBag()
     
+    let relay: PublishRelay<String> = PublishRelay<String>()
+    
 // - LifeCycle
     
     override func viewDidLoad() {
@@ -31,9 +34,8 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         view = webView
         
-        navigateToOauth()
-        
         setupDataBinding()
+        navigateToOauth()
     }
 }
 
@@ -44,7 +46,15 @@ extension QiitaLoginViewController {
         //TODO:  認証コードを取得するまでAPIを叩くのを待機させる
         viewModel.getAccessToken()
             .subscribe(onNext: { _ in
-                print("call")
+                print("get AccessToken")
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.input(authCode: relay)
+            .transition
+            .asObservable() // 後でviewmodel側でやる様に変更する
+            .subscribe(onNext: { _ in
+                // 画面遷移
             })
             .disposed(by: disposeBag)
     }

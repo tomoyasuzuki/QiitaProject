@@ -11,6 +11,11 @@ import RxSwift
 import RxCocoa
 
 class QiitaLoginViewModel {
+    
+    struct Output {
+        let transition: Signal<Void>
+    }
+    
     let api = API()
     
     let acceessTokenRelay: PublishRelay<String> = PublishRelay<String>()
@@ -26,6 +31,10 @@ class QiitaLoginViewModel {
                 UserDefaults.standard.setValue(token.token, forKey: "accessToken")
             })
             .map { _ in () }
+    }
+    
+    func input(authCode: PublishRelay<String>) -> Output {
+        zs
     }
 }
 
