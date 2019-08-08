@@ -52,8 +52,7 @@ extension QiitaLoginViewController {
         
         viewModel.input(authCode: relay)
             .transition
-            .asObservable()
-            .subscribe(onNext: { _ in
+            .emit(onNext: { _ in
                 self.navigateToUserProfile()
             })
             .disposed(by: disposeBag)
@@ -74,7 +73,7 @@ extension QiitaLoginViewController {
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         let url = webView.url?.absoluteString
         guard let code = getParameter(url: url!, param: "code") else { return }
-        UserDefaults.standard.set(code, forKey: "authCode")
+        relay.accept(code)
     }
 }
 
