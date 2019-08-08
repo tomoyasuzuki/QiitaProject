@@ -22,12 +22,16 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     let viewModel = QiitaLoginViewModel()
     let disposeBag = DisposeBag()
     
+    private var output: QiitaLoginViewModel.Output!
+    
     let relay: PublishRelay<String> = PublishRelay<String>()
     
 // - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        output = viewModel.input(authCode: relay)
         
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
