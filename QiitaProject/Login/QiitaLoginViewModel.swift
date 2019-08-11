@@ -9,34 +9,27 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Alamofire
 
 class QiitaLoginViewModel {
+    
+    let api = API()
     
     struct Output {
         let transition: Signal<Void>
     }
     
-    let api = API()
-    
-    let acceessTokenRelay: PublishRelay<String> = PublishRelay<String>()
-    var accessTokenObservable: Observable<String> { return acceessTokenRelay.asObservable() }
-    
-    func getAccessToken() -> Observable<Void> {
-        return api.call(AccessTokenRequest(code: UserDefaults.standard.string(forKey: "authCode")!))
-            .asObservable()
-            .map { response in try! JSONDecoder().decode(Token.self, from: response.data!) }
-            .do(onNext: { token in
-                self.acceessTokenRelay.accept(token.token)
-                print("find token: \(token.token)")
-                UserDefaults.standard.setValue(token.token, forKey: "accessToken")
-            })
-            .map { _ in () }
-    }
-    
     func input(authCode: PublishRelay<String>) -> Output {
         let transition = authCode
-                        .asSignal() // 本当はここでAPIを叩く?
+                        .flatMap { [weak self] code -> Observable<DataResponse<Data>> in
+                            guard let self = self else { return Observable.empty() }
+                            return self.api.call(AccessTokenRequest(code: code)).asObservable() }
+                        .map { response in try! JSONDecoder().decode(Token.self, from: response.data!) }
+                        .do(onNext: { token in
+                            UserDefaults.standard.set(token.token, forKey: "accessToken")
+                        })
                         .map { _ in ()}
+                        .asSignal(onErrorSignalWith: Signal.empty())
         
         return Output(transition: transition)
     }

@@ -29,8 +29,6 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let output = viewModel.input(authCode: relay)
-        
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.navigationDelegate = self
@@ -45,14 +43,9 @@ class QiitaLoginViewController: UIViewController, WKNavigationDelegate {
 
 extension QiitaLoginViewController {
     private func setupDataBinding() {
-        //TODO:  認証コードを取得するまでAPIを叩くのを待機させる
-        viewModel.getAccessToken()
-            .subscribe(onNext: { _ in
-                print("get AccessToken")
-            })
-            .disposed(by: disposeBag)
+        let outlet = viewModel.input(authCode: relay)
         
-        viewModel.input(authCode: relay)
+        outlet
             .transition
             .emit(onNext: { _ in
                 self.navigateToUserProfile()
