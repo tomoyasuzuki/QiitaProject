@@ -14,14 +14,18 @@ struct AuthenticatedUserProfileRequest: RequestProtocol {
         self.accessToken = accessToken
     }
     
-    var accessToken: String = ""
+    var accessToken: String!
     
     var method: HTTPMethod {
         return .get
     }
     
     var path: String {
-        return "/users/\(accessToken)/"
+        return "/authenticated_user"
+    }
+    
+    var headers: HTTPHeaders? {
+        return ["Authorization": "Bearer \(accessToken)"]
     }
 }
 

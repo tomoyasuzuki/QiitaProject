@@ -87,7 +87,7 @@ extension SideMenuViewController {
         
         userProfileImageButton.snp.makeConstraints { make in
             make.height.equalTo(buttonHeight)
-            make.top.equalTo(view).offset(48)
+            make.top.equalTo(view).offset(60)
             make.left.equalTo(view).offset(32)
         }
         
