@@ -18,13 +18,14 @@ class API {
                 return disposeBag
             }
             
-            Alamofire.request(url, method: request.method, parameters: request.parameters)
+            Alamofire.request(url, method: request.method, parameters: request.parameters,encoding: request.encoding)
                 .validate()
                 .responseData { response in
                     switch response.result {
                     case .success:
                         observer(.success(response))
                     case .failure(let error):
+                        print("failure:\(error.localizedDescription)")
                         observer(.error(error))
                 }
             }

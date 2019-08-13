@@ -6,9 +6,15 @@
 //  Copyright © 2019 tomoya.suzuki. All rights reserved.
 //
 
-struct Token: Codable {
-    let clientID: String
+struct AccessToken: Codable {
+    let clientId: String
     let scopes: [String]
     let token: String
+    
+    enum CodingKeys: String, CodingKey {
+        case clientId = "client_id"
+        case scopes
+        case token
+    }
 }
 

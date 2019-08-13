@@ -11,17 +11,14 @@ protocol RequestProtocol {
     var baseURL: String { get }
     var method: HTTPMethod { get }
     var path: String { get }
-    var httpHeaders: HTTPHeaders? { get }
     var parameters: Parameters? { get }
     var headers: HTTPHeaders? { get }
+    var encoding: JSONEncoding { get }
 }
 
 extension RequestProtocol {
     var baseURL: String {
         return "https://qiita.com/api/v2"
-    }
-    var httpHeaders: HTTPHeaders? {
-        return nil
     }
     
     var parameters: Parameters? {
@@ -30,5 +27,9 @@ extension RequestProtocol {
     
     var headers: HTTPHeaders? {
         return nil
+    }
+    
+    var encoding: JSONEncoding {
+        return JSONEncoding.default
     }
 }

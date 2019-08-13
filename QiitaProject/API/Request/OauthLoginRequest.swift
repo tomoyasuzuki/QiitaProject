@@ -18,6 +18,6 @@ struct OauthLoginRequest: RequestProtocol {
     }
     
     var parameters: Parameters? {
-        return ["client_id": APIConstant.clientId, "scopes": ["read_qiita"], "client_secret": APIConstant.clientSecret]
+        return ["client_id": APIConstant.clientId, "scope": "read_qiita"]
     }
 }

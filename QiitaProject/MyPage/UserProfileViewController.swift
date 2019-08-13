@@ -20,8 +20,6 @@ class UserProfileViewController: UIViewController {
     
     private let backgroundViewSize: CGSize = CGSize(width: 75.0, height: 75.0)
     
-    var itemsCount: Int = 0
-    
     // - View
     
     private lazy var loginPromptView: UIView = {
@@ -153,29 +151,24 @@ class UserProfileViewController: UIViewController {
     // - DataBinding
     
     private func setupDataBinding() {
-        viewModel.fetchUserProfile()?
-            .subscribe(onNext: { userProfile in
-                self.userNameLabel.text = userProfile.name
-                self.followeeCountLabel.text = userProfile.followeesCount?.description
-                self.followerCountLabel.text = userProfile.followersCount?.description
-                
-                guard let usreProfileImageUrlString: String = userProfile.profileImageUrl else { return }
-                Nuke.loadImage(with: URL(string: usreProfileImageUrlString)!, into: self.userProfileImageView)
-                
-                guard let itemsCount = userProfile.itemsCount else { return }
-                self.itemsCount = itemsCount
-            })
-            .disposed(by: disposeBag)
         
-        viewModel.fetchUserFolloingTags()?
-            .subscribe(onNext: { tags in
+        let output = viewModel.input()
+        
+        output
+            .userProfiles
+            .emit(onNext: { (user, tags, stockItems) in
+                self.userNameLabel.text = user.name
+                self.followeeCountLabel.text = user.followeesCount?.description
+                self.followerCountLabel.text = user.followersCount?.description
                 self.tagsCountLabel.text = tags.count.description
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.fetchUserStockItems()?
-            .subscribe(onNext: { stockItems in
                 self.stockItemsCountLabel.text = stockItems.count.description
+                
+                if let usreProfileImageUrlString: String = user.profileImageUrl {
+                    Nuke.loadImage(with: URL(string: usreProfileImageUrlString)!, into: self.userProfileImageView)
+                }
+                
+                UserDefaults.standard.set(user.id, forKey: "userId")
+                UserDefaults.standard.object(forKey: "userStatus")
             })
             .disposed(by: disposeBag)
     }
@@ -284,7 +277,7 @@ class UserProfileViewController: UIViewController {
         }
         
         userProfileImageView.snp.makeConstraints { make in
-            make.top.equalTo(view).offset(80)
+            make.top.equalTo(view).offset(120)
             make.left.equalTo(view).offset(32)
             make.size.equalTo(backgroundViewSize)
         }
@@ -375,7 +368,7 @@ class UserProfileViewController: UIViewController {
 
 extension UserProfileViewController {
     func checkUserStatus() {
-        if UserDefaults.standard.bool(forKey: "userStatus") {
+        if UserDefaults.standard.object(forKey: "SignIn") as? Bool == true {
             loginPromptView.isHidden = true
         } else {
            loginPromptView.isHidden = false

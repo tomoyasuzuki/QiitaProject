@@ -51,6 +51,7 @@ class ItemsViewModel {
             })
             .map { response in try! JSONDecoder().decode([Item].self, from: response.data!)}
             .do(onNext: { items in
+                self.items = items
                 self.itemsRelay.accept(self.items)
             })
             .map { _ in ()}

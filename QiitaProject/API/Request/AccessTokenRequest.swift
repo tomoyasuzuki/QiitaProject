@@ -12,6 +12,7 @@ struct AccessTokenRequest: RequestProtocol {
     
     init(code: String) {
         self.code = code
+        debugPrint()
     }
     
     var code: String?
@@ -26,6 +27,10 @@ struct AccessTokenRequest: RequestProtocol {
     
     var parameters: Parameters? {
         return ["client_id": APIConstant.clientId, "client_secret": APIConstant.clientSecret, "code": code!]
+    }
+    
+    var encoding: JSONEncoding {
+        return JSONEncoding.default
     }
 }
 

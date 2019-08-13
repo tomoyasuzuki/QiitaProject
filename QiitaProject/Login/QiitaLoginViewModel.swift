@@ -24,9 +24,10 @@ class QiitaLoginViewModel {
                         .flatMap { [weak self] code -> Observable<DataResponse<Data>> in
                             guard let self = self else { return Observable.empty() }
                             return self.api.call(AccessTokenRequest(code: code)).asObservable() }
-                        .map { response in try! JSONDecoder().decode(Token.self, from: response.data!) }
+                        .map { response in try! JSONDecoder().decode(AccessToken.self, from: response.data!) }
                         .do(onNext: { token in
                             UserDefaults.standard.set(token.token, forKey: "accessToken")
+                            UserDefaults.standard.set(true, forKey: "SignIn")
                         })
                         .map { _ in ()}
                         .asSignal(onErrorSignalWith: Signal.empty())
