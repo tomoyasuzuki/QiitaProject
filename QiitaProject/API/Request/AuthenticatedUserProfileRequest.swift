@@ -25,7 +25,11 @@ struct AuthenticatedUserProfileRequest: RequestProtocol {
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(accessToken)"]
+        return ["Content-Type": "application/json"]
+    }
+    
+    var parameters: Parameters? {
+        return ["Authorization": "Bearer \(accessToken ?? "")"]
     }
 }
 

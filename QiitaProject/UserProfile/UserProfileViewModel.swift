@@ -14,40 +14,41 @@ class UserProfileViewModel {
     let api = API()
    
     struct Output {
-        let userProfiles: Signal<(AuthenticatedUser,[ItemTag],[Item])>
+        let user: Signal<AuthenticatedUser>
+        let tags: Signal<[ItemTag]>
+        let stockItems: Signal<[Item]>
     }
     
     func input() -> Output {
         
-        var user: Observable<AuthenticatedUser> {
-            guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else { return Observable.empty() }
+        var user: Signal<AuthenticatedUser> {
+            guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else { return Signal.empty() }
+            print(accessToken)
             
             return api.call(AuthenticatedUserProfileRequest(accessToken: accessToken))
                 .asObservable()
                 .map { response in try! JSONDecoder().decode(AuthenticatedUser.self, from: response.data!)}
+                .asSignal(onErrorSignalWith: Signal.empty())
         }
         
-        var tags: Observable<[ItemTag]> {
-            guard let userId = UserDefaults.standard.string(forKey: "userId") else { return Observable.empty() }
+        var tags: Signal<[ItemTag]> {
+            guard let userId = UserDefaults.standard.string(forKey: "userId") else { return Signal.empty() }
             
             return api.call(UserFollowingTagsRequest(userId: userId))
                 .asObservable()
                 .map { response in try! JSONDecoder().decode([ItemTag].self, from: response.data!) }
+                .asSignal(onErrorSignalWith: Signal.empty())
         }
         
-        var stockItmes: Observable<[Item]> {
-            guard let userId = UserDefaults.standard.string(forKey: "userId") else { return Observable.empty() }
+        var stockItmes: Signal<[Item]> {
+            guard let userId = UserDefaults.standard.string(forKey: "userId") else { return Signal.empty() }
             
             return api.call(UserStocksRequest(userId: userId))
                 .asObservable()
                 .map { response in try! JSONDecoder().decode([Item].self, from: response.data!) }
+                .asSignal(onErrorSignalWith: Signal.empty())
         }
         
-
-        let userProfiles = Observable
-            .combineLatest(user, tags, stockItmes)
-            .asSignal(onErrorSignalWith: Signal.empty())
-        
-        return Output(userProfiles: userProfiles)
+        return Output(user: user, tags: tags, stockItems: stockItmes)
     }
 }

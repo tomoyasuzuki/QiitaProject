@@ -7,7 +7,7 @@
 //
 
 struct AuthenticatedUser: Codable {
-    let itemsDescription, facebookID: String?
+    let itemsDescription, facebookId: String?
     let followeesCount, followersCount: Int?
     let githubLoginName, id: String?
     let itemsCount: Int?

@@ -18,10 +18,9 @@ class API {
                 return disposeBag
             }
             
-            Alamofire.request(url, method: request.method, parameters: request.parameters,encoding: request.encoding)
+            Alamofire.request(url, method: request.method, parameters: request.parameters,encoding: request.encoding, headers: request.headers)
                 .validate()
                 .responseData { response in
-                    print("request:\(response.request?.allHTTPHeaderFields)")
                     switch response.result {
                     case .success:
                         observer(.success(response))

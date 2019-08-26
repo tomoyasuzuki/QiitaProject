@@ -47,7 +47,8 @@ extension QiitaLoginViewController {
         
         outlet
             .transition
-            .emit(onNext: { _ in
+            .emit(onNext: { [weak self] in
+                guard let self = self else { return }
                 self.navigateToUserProfile()
             })
             .disposed(by: disposeBag)
@@ -84,6 +85,7 @@ extension QiitaLoginViewController {
     
     private func getParameter(url: String, param: String) -> String? {
         guard let url = URLComponents(string: url) else { return nil }
+        print("debug url: \(url)")
         // パラメータのnameがparamに初めて一致した時のvalueを取り出している
         return url.queryItems?.first(where: { $0.name == param })!.value! ?? ""
     }
@@ -94,3 +96,5 @@ extension QiitaLoginViewController {
         navigationController?.pushViewController(UserProfileViewController(), animated: true)
     }
 }
+
+

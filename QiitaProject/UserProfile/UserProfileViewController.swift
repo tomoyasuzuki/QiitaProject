@@ -155,20 +155,19 @@ class UserProfileViewController: UIViewController {
         let output = viewModel.input()
         
         output
-            .userProfiles
-            .emit(onNext: { (user, tags, stockItems) in
+            .user
+            .emit(onNext: { user in
                 self.userNameLabel.text = user.name
                 self.followeeCountLabel.text = user.followeesCount?.description
                 self.followerCountLabel.text = user.followersCount?.description
-                self.tagsCountLabel.text = tags.count.description
-                self.stockItemsCountLabel.text = stockItems.count.description
+                
+                print(user)
                 
                 if let usreProfileImageUrlString: String = user.profileImageUrl {
                     Nuke.loadImage(with: URL(string: usreProfileImageUrlString)!, into: self.userProfileImageView)
                 }
                 
                 UserDefaults.standard.set(user.id, forKey: "userId")
-                UserDefaults.standard.object(forKey: "userStatus")
             })
             .disposed(by: disposeBag)
     }
